@@ -64,6 +64,7 @@ The following arguments are supported:
 * `secure_channel_se_token_timeout` - (Optional) Placeholder for description of property secure_channel_se_token_timeout of obj type controllerproperties field type integer  type int.
 * `seupgrade_fabric_pool_size` - (Optional) Pool size used for all fabric commands during se upgrade.
 * `seupgrade_segroup_min_dead_timeout` - (Optional) Time to wait before marking segroup upgrade as stuck.
+* `shared_ssl_certificates` - (Optional) Ssl certificates in the admin tenant can be used in non-admin tenants.
 * `ssl_certificate_expiry_warning_days` - (Optional) Number of days for ssl certificate expiry warning.
 * `unresponsive_se_reboot` - (Optional) Placeholder for description of property unresponsive_se_reboot of obj type controllerproperties field type integer  type int.
 * `upgrade_dns_ttl` - (Optional) Time to account for dns ttl during upgrade.

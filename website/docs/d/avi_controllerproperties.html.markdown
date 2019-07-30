@@ -69,6 +69,7 @@ In addition to all arguments above, the following attributes are exported:
 * `secure_channel_se_token_timeout` - Placeholder for description of property secure_channel_se_token_timeout of obj type controllerproperties field type integer  type int.
 * `seupgrade_fabric_pool_size` - Pool size used for all fabric commands during se upgrade.
 * `seupgrade_segroup_min_dead_timeout` - Time to wait before marking segroup upgrade as stuck.
+* `shared_ssl_certificates` - Ssl certificates in the admin tenant can be used in non-admin tenants.
 * `ssl_certificate_expiry_warning_days` - Number of days for ssl certificate expiry warning.
 * `unresponsive_se_reboot` - Placeholder for description of property unresponsive_se_reboot of obj type controllerproperties field type integer  type int.
 * `upgrade_dns_ttl` - Time to account for dns ttl during upgrade.
