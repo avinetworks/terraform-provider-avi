@@ -24,11 +24,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  false,
 		},
-		"advertise_backend_networks": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
-		},
 		"aggressive_failure_detection": {
 			Type:     schema.TypeBool,
 			Optional: true,
@@ -97,7 +92,7 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 		"bgp_state_update_interval": {
 			Type:     schema.TypeInt,
 			Optional: true,
-			Default:  10,
+			Default:  60,
 		},
 		"buffer_se": {
 			Type:     schema.TypeInt,
@@ -224,20 +219,10 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  false,
 		},
-		"enable_routing": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
-		},
-		"enable_vip_on_all_interfaces": {
+		"enable_pcap_tx_ring": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,
-		},
-		"enable_vmac": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
 		},
 		"ephemeral_portrange_end": {
 			Type:     schema.TypeInt,
@@ -258,16 +243,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  0,
-		},
-		"floating_intf_ip": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem:     ResourceIpAddrSchema(),
-		},
-		"floating_intf_ip_se_2": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem:     ResourceIpAddrSchema(),
 		},
 		"flow_table_new_syn_max_entries": {
 			Type:     schema.TypeInt,
@@ -599,7 +574,7 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 		"se_pcap_pkt_sz": {
 			Type:     schema.TypeInt,
 			Optional: true,
-			Default:  65536,
+			Default:  69632,
 		},
 		"se_pcap_reinit_frequency": {
 			Type:     schema.TypeInt,
@@ -620,11 +595,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  1501,
-		},
-		"se_routing": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  true,
 		},
 		"se_sb_dedicated_core": {
 			Type:     schema.TypeBool,

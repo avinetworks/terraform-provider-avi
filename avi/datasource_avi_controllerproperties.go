@@ -175,6 +175,10 @@ func dataSourceAviControllerProperties() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"shared_ssl_certificates": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"ssl_certificate_expiry_warning_days": {
 				Type:     schema.TypeList,
 				Computed: true,

@@ -219,6 +219,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  360,
 		},
+		"shared_ssl_certificates": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
+		},
 		"ssl_certificate_expiry_warning_days": {
 			Type:     schema.TypeList,
 			Optional: true,
