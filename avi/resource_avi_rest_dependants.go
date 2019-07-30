@@ -6394,28 +6394,67 @@ func ResourceAzureServicePrincipalCredentialsSchema() *schema.Resource {
 	}
 }
 
-func ResourceCloudSeVmChangeSchema() *schema.Resource {
+func ResourceMatchTargetSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"cc_id": {
-				Type:     schema.TypeString,
+			"client_ip": {
+				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
+				Elem:     ResourceIpAddrMatchSchema(),
 			},
-			"error_string": {
-				Type:     schema.TypeString,
+			"cookie": {
+				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
+				Elem:     ResourceCookieMatchSchema(),
 			},
-			"se_vm_uuid": {
-				Type:     schema.TypeString,
+			"hdrs": {
+				Type:     schema.TypeList,
 				Optional: true,
-				Computed: true,
+				Elem:     ResourceHdrMatchSchema(),
 			},
-			"vtype": {
-				Type:     schema.TypeString,
+			"host_hdr": {
+				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
+				Elem:     ResourceHostHdrMatchSchema(),
+			},
+			"method": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceMethodMatchSchema(),
+			},
+			"path": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourcePathMatchSchema(),
+			},
+			"protocol": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceProtocolMatchSchema(),
+			},
+			"query": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceQueryMatchSchema(),
+			},
+			"version": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceHTTPVersionMatchSchema(),
+			},
+			"vs_port": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourcePortMatchSchema(),
 			},
 		},
 	}
@@ -20209,34 +20248,18 @@ func ResourceSeUpgradeVsDisruptedEventDetailsSchema() *schema.Resource {
 	}
 }
 
-func ResourceWafPSMLocationSchema() *schema.Resource {
+func ResourceSeUpgradeScaleoutEventDetailsSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"description": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"index": {
-				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
-			},
-			"match": {
+			"scaleout_params": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceWafPSMLocationMatchSchema(),
+				Elem:     ResourceVsScaleoutParamsSchema(),
 			},
-			"name": {
+			"vs_uuid": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"rules": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourceWafPSMRuleSchema(),
+				Required: true,
 			},
 		},
 	}
@@ -25013,67 +25036,28 @@ func ResourceAuthorizationRuleSchema() *schema.Resource {
 	}
 }
 
-func ResourceMatchTargetSchema() *schema.Resource {
+func ResourceCloudSeVmChangeSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"client_ip": {
-				Type:     schema.TypeSet,
+			"cc_id": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceIpAddrMatchSchema(),
 			},
-			"cookie": {
-				Type:     schema.TypeSet,
+			"error_string": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceCookieMatchSchema(),
 			},
-			"hdrs": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourceHdrMatchSchema(),
-			},
-			"host_hdr": {
-				Type:     schema.TypeSet,
+			"se_vm_uuid": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceHostHdrMatchSchema(),
 			},
-			"method": {
-				Type:     schema.TypeSet,
+			"vtype": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceMethodMatchSchema(),
-			},
-			"path": {
-				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
-				Elem:     ResourcePathMatchSchema(),
-			},
-			"protocol": {
-				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
-				Elem:     ResourceProtocolMatchSchema(),
-			},
-			"query": {
-				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
-				Elem:     ResourceQueryMatchSchema(),
-			},
-			"version": {
-				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
-				Elem:     ResourceHTTPVersionMatchSchema(),
-			},
-			"vs_port": {
-				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
-				Elem:     ResourcePortMatchSchema(),
 			},
 		},
 	}
@@ -26743,18 +26727,34 @@ func ResourceHTTPRedirectActionSchema() *schema.Resource {
 	}
 }
 
-func ResourceSeUpgradeScaleoutEventDetailsSchema() *schema.Resource {
+func ResourceWafPSMLocationSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"scaleout_params": {
+			"description": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"index": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"match": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceVsScaleoutParamsSchema(),
+				Elem:     ResourceWafPSMLocationMatchSchema(),
 			},
-			"vs_uuid": {
+			"name": {
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
+				Computed: true,
+			},
+			"rules": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceWafPSMRuleSchema(),
 			},
 		},
 	}
