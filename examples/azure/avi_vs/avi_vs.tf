@@ -112,25 +112,8 @@ resource "avi_virtualservice" "azure-virtualservice" {
   vrf_context_ref              = data.avi_vrfcontext.terraform_vrf.id
   scaleout_ecmp                = true
   enabled                      = true
+  vsvip_ref                    = avi_vsvip.azure-vs-vsvip.id
 
-  //vsvip_ref                    = "${avi_vsvip.azure-vs-vsvip.id}"
-
-  vip {
-    vip_id            = "0"
-    auto_allocate_ip  = true
-    avi_allocated_vip = true
-    avi_allocated_fip = false
-    subnet_uuid       = data.azurerm_subnet.terraform_subnet.name
-    enabled           = true
-    subnet {
-      ip_addr {
-        addr = var.azure_vip_subnet_ip
-        type = "V4"
-      }
-
-      mask = var.azure_vip_subnet_mask
-    }
-  }
   services {
     port           = 80
     enable_ssl     = true
