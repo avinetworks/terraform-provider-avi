@@ -7,42 +7,24 @@ package avi
 
 import "github.com/hashicorp/terraform/helper/schema"
 
-func dataSourceAviSSLProfile() *schema.Resource {
+func dataSourceAviUpgradeStatusSummary() *schema.Resource {
 	return &schema.Resource{
-		Read: ResourceAviSSLProfileRead,
+		Read: ResourceAviUpgradeStatusSummaryRead,
 		Schema: map[string]*schema.Schema{
-			"accepted_ciphers": {
-				Type:     schema.TypeString,
-				Computed: true,
-			},
-			"accepted_versions": {
-				Type:     schema.TypeList,
-				Computed: true,
-				Elem:     ResourceSSLVersionSchema(),
-			},
-			"cipher_enums": {
-				Type:     schema.TypeList,
-				Computed: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-			},
-			"ciphersuites": {
-				Type:     schema.TypeString,
-				Computed: true,
-			},
-			"description": {
-				Type:     schema.TypeString,
-				Computed: true,
-			},
-			"dhparam": {
-				Type:     schema.TypeString,
-				Computed: true,
-			},
-			"enable_early_data": {
+			"enable_patch_rollback": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
-			"enable_ssl_session_reuse": {
+			"enable_rollback": {
 				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"end_time": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"image_ref": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 			"name": {
@@ -50,40 +32,51 @@ func dataSourceAviSSLProfile() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
-			"prefer_client_cipher_ordering": {
-				Type:     schema.TypeBool,
+			"node_type": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"send_close_notify": {
-				Type:     schema.TypeBool,
+			"obj_cloud_ref": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"ssl_rating": {
+			"patch_image_ref": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"start_time": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"state": {
 				Type:     schema.TypeSet,
 				Computed: true,
-				Elem:     ResourceSSLRatingSchema(),
+				Elem:     ResourceUpgradeOpsStateSchema(),
 			},
-			"ssl_session_timeout": {
+			"tasks_completed": {
 				Type:     schema.TypeInt,
 				Computed: true,
-			},
-			"tags": {
-				Type:     schema.TypeList,
-				Computed: true,
-				Elem:     ResourceTagSchema(),
 			},
 			"tenant_ref": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"type": {
+			"total_tasks": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"upgrade_ops": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
 			"uuid": {
 				Type:     schema.TypeString,
 				Optional: true,
+				Computed: true,
+			},
+			"version": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 		},

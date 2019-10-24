@@ -94,6 +94,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  360,
 		},
+		"default_minimum_api_timeout": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  60,
+		},
 		"dns_refresh_period": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -209,6 +214,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  60,
 		},
+		"seupgrade_copy_pool_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  5,
+		},
 		"seupgrade_fabric_pool_size": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -218,6 +228,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  360,
+		},
+		"shared_ssl_certificates": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
 		},
 		"ssl_certificate_expiry_warning_days": {
 			Type:     schema.TypeList,

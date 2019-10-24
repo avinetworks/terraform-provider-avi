@@ -9,7 +9,6 @@ import (
 	"github.com/avinetworks/sdk/go/clients"
 	"github.com/hashicorp/terraform/helper/schema"
 	"log"
-	"strings"
 	"time"
 )
 
@@ -45,6 +44,30 @@ func ResourceClusterSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourceIpAddrSchema(),
 		},
+		"cluster_state": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"up_since": {
+						Type:     schema.TypeString,
+						Optional: true,
+						Computed: true,
+					},
+					"progress": {
+						Type:     schema.TypeInt,
+						Optional: true,
+						Computed: true,
+					},
+					"state": {
+						Type:     schema.TypeString,
+						Optional: true,
+						Computed: true,
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -68,9 +91,15 @@ func ResourceClusterImporter(d *schema.ResourceData, m interface{}) ([]*schema.R
 
 func ResourceAviClusterRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceClusterSchema()
-	err := ApiRead(d, meta, "cluster", s)
-	if err != nil {
-		log.Printf("[ERROR] in reading object %v\n", err)
+	err := read_cluster_state(d, meta, s)
+	if err == nil {
+		err := ApiRead(d, meta, "cluster", s)
+		if err != nil {
+			log.Printf("[ERROR] in reading object %v\n", err)
+			return err
+		}
+	} else {
+		log.Printf("[ERROR] in Updateing cluster state object %v\n", err)
 	}
 	return err
 }
@@ -101,20 +130,29 @@ func resourceAviClusterUpdate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceAviClusterDelete(d *schema.ResourceData, meta interface{}) error {
-	objType := "cluster"
-	if ApiDeleteSystemDefaultCheck(d) {
-		return nil
-	}
+	log.Printf("[WARNING] WE can not delete cluster.")
+	return nil
+}
+
+// Function to get the cluster state and update the exact cluster state into d
+func read_cluster_state(d *schema.ResourceData, meta interface{}, s map[string]*schema.Schema) error {
 	client := meta.(*clients.AviClient)
-	uuid := d.Get("uuid").(string)
-	if uuid != "" {
-		path := "api/" + objType + "/" + uuid
-		err := client.AviSession.Delete(path)
-		if err != nil && !(strings.Contains(err.Error(), "404") || strings.Contains(err.Error(), "204") || strings.Contains(err.Error(), "403")) {
-			log.Println("[INFO] resourceAviClusterDelete not found")
+	var err error
+	var robj interface{}
+	if err = client.AviSession.Get("api/cluster/runtime", &robj); err == nil {
+		if local_data, err := SchemaToAviData(d, s); err == nil {
+			if mod_api_res, err := SetDefaultsInAPIRes(robj, local_data, s); err == nil {
+				if _, err := ApiDataToSchema(mod_api_res, d, s); err != nil {
+					log.Printf("[ERROR] Converting ApiDataToSchema object %v\n", err)
+					return err
+				}
+			} else {
+				log.Printf("[ERROR] Update Cluster State in modifying api response object %v\n", err)
+				return err
+			}
+		} else {
 			return err
 		}
-		d.SetId("")
 	}
-	return nil
+	return err
 }
