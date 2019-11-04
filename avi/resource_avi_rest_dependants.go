@@ -1588,6 +1588,43 @@ func ResourceDnsRrSetSchema() *schema.Resource {
 	}
 }
 
+func ResourceSAMLSPConfigSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"cookie_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"cookie_timeout": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  60,
+			},
+			"entity_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"key": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceHttpCookiePersistenceKeySchema(),
+			},
+			"signing_ssl_key_and_certificate_ref": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"single_signon_url": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceGeoLocationSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -2457,6 +2494,58 @@ func ResourceSamlServiceProviderSettingsSchema() *schema.Resource {
 				Computed: true,
 			},
 			"tech_contact_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceAzureMarketplaceSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"cc_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"offer": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"publisher": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"reason": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"resource_group": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"skus": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"status": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"subscription_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"vnet_id": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -8750,25 +8839,50 @@ func ResourceDnsRuleActionResponseSchema() *schema.Resource {
 	}
 }
 
-func ResourceUpgradeTaskSchema() *schema.Resource {
+func ResourceSeIpAddedEventDetailsSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"duration": {
+			"if_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"end_time": {
+			"ip": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"start_time": {
+			"linux_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"task": {
+			"mac": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"mask": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"mode": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"network_uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"ns": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"se_ref": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -10929,51 +11043,470 @@ func ResourceAlertSyslogServerSchema() *schema.Resource {
 	}
 }
 
-func ResourceAzureMarketplaceSchema() *schema.Resource {
+func ResourceVserverL4MetricsObjSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"cc_id": {
-				Type:     schema.TypeString,
+			"apdexc": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"offer": {
-				Type:     schema.TypeString,
+			"apdexrtt": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"publisher": {
-				Type:     schema.TypeString,
+			"avg_application_dos_attacks": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"reason": {
-				Type:     schema.TypeString,
+			"avg_bandwidth": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"resource_group": {
-				Type:     schema.TypeString,
+			"avg_bytes_policy_drops": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"skus": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-			},
-			"status": {
-				Type:     schema.TypeString,
+			"avg_complete_conns": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"subscription_id": {
-				Type:     schema.TypeString,
+			"avg_connections_dropped": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
-			"vnet_id": {
+			"avg_dos_app_error": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_attacks": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_bad_rst_flood": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_bandwidth": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_conn": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_conn_ip_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_conn_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_fake_session": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_http_abort": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_http_error": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_http_timeout": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_malformed_flood": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_non_syn_flood": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_cookie_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_custom_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_hdr_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_ip_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_ip_rl_drop_bad": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_ip_scan_bad_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_ip_scan_unknown_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_ip_uri_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_ip_uri_rl_drop_bad": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_uri_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_uri_rl_drop_bad": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_uri_scan_bad_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_req_uri_scan_unknown_rl_drop": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_rx_bytes": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_slow_uri": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_small_window_stress": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_ssl_error": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_syn_flood": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_total_req": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_tx_bytes": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_dos_zero_window_stress": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_errored_connections": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_l4_client_latency": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_lossy_connections": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_lossy_req": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_network_dos_attacks": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_new_established_conns": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_pkts_policy_drops": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_policy_drops": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_rx_bytes": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_rx_bytes_dropped": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_rx_pkts": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_rx_pkts_dropped": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_syns": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_total_connections": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_total_rtt": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_tx_bytes": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_tx_pkts": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"max_num_active_se": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"max_open_conns": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"max_rx_bytes_absolute": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"max_rx_pkts_absolute": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"max_tx_bytes_absolute": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"max_tx_pkts_absolute": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"node_obj_id": {
 				Type:     schema.TypeString,
+				Required: true,
+			},
+			"pct_application_dos_attacks": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_connection_errors": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_connections_dos_attacks": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_dos_bandwidth": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_dos_rx_bytes": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_network_dos_attacks": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_pkts_dos_attacks": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"pct_policy_drops": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_conn_duration": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_connection_dropped_user_limit": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_connection_errors": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_connections_dropped": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_dup_ack_retransmits": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_end_to_end_rtt": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_end_to_end_rtt_bucket1": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_end_to_end_rtt_bucket2": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_finished_conns": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_lossy_connections": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_lossy_req": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_out_of_orders": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_packet_dropped_user_bandwidth_limit": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_rtt_valid_connections": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_sack_retransmits": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_server_flow_control": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_timeout_retransmits": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"sum_zero_window_size_events": {
+				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
@@ -13066,38 +13599,21 @@ func ResourceStreamingSyslogConfigSchema() *schema.Resource {
 	}
 }
 
-func ResourceSAMLSPConfigSchema() *schema.Resource {
+func ResourceSubJobSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"cookie_name": {
+			"expires_at": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"metadata": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"cookie_timeout": {
-				Type:     schema.TypeInt,
-				Optional: true,
-				Default:  60,
-			},
-			"entity_id": {
+			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"key": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourceHttpCookiePersistenceKeySchema(),
-			},
-			"signing_ssl_key_and_certificate_ref": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"single_signon_url": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -18137,44 +18653,44 @@ func ResourceHTTPHdrValueSchema() *schema.Resource {
 	}
 }
 
-func ResourceCfgStateSchema() *schema.Resource {
+func ResourceHealthMonitorHttpSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"cfg_version": {
-				Type:     schema.TypeInt,
+			"exact_http_request": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  false,
+			},
+			"http_request": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "GET / HTTP/1.0",
+			},
+			"http_response": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"cfg_version_in_flight": {
-				Type:     schema.TypeInt,
+			"http_response_code": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"maintenance_code": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeInt},
+			},
+			"maintenance_response": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"last_changed_time": {
+			"ssl_attributes": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceTimeStampSchema(),
-			},
-			"reason": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"site_uuid": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"status": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "SYSERR_SUCCESS",
-			},
-			"uuid": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Elem:     ResourceHealthMonitorSSLAttributesSchema(),
 			},
 		},
 	}
@@ -20297,28 +20813,6 @@ func ResourceAuthAttributeMatchSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceStringMatchSchema(),
-			},
-		},
-	}
-}
-
-func ResourcePaaLogSchema() *schema.Resource {
-	return &schema.Resource{
-		Schema: map[string]*schema.Schema{
-			"cache_hit": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Computed: true,
-			},
-			"client_request_body_sent": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Computed: true,
-			},
-			"request_logs": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourcePaaRequestLogSchema(),
 			},
 		},
 	}
@@ -23745,50 +24239,25 @@ func ResourceObjectAccessPolicyRuleSchema() *schema.Resource {
 	}
 }
 
-func ResourceSeIpAddedEventDetailsSchema() *schema.Resource {
+func ResourceUpgradeTaskSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"if_name": {
+			"duration": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"ip": {
+			"end_time": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"linux_name": {
+			"start_time": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"mac": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"mask": {
-				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
-			},
-			"mode": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"network_uuid": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"ns": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"se_ref": {
+			"task": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -24788,477 +25257,6 @@ func ResourceDockerRegistrySchema() *schema.Resource {
 			},
 			"username": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-		},
-	}
-}
-
-func ResourceVserverL4MetricsObjSchema() *schema.Resource {
-	return &schema.Resource{
-		Schema: map[string]*schema.Schema{
-			"apdexc": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"apdexrtt": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_application_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_bandwidth": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_bytes_policy_drops": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_complete_conns": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_connections_dropped": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_app_error": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_bad_rst_flood": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_bandwidth": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_conn": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_conn_ip_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_conn_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_fake_session": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_http_abort": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_http_error": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_http_timeout": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_malformed_flood": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_non_syn_flood": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_cookie_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_custom_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_hdr_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_ip_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_ip_rl_drop_bad": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_ip_scan_bad_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_ip_scan_unknown_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_ip_uri_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_ip_uri_rl_drop_bad": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_uri_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_uri_rl_drop_bad": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_uri_scan_bad_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_req_uri_scan_unknown_rl_drop": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_rx_bytes": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_slow_uri": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_small_window_stress": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_ssl_error": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_syn_flood": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_total_req": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_tx_bytes": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_dos_zero_window_stress": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_errored_connections": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_l4_client_latency": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_lossy_connections": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_lossy_req": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_network_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_new_established_conns": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_pkts_policy_drops": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_policy_drops": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_rx_bytes": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_rx_bytes_dropped": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_rx_pkts": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_rx_pkts_dropped": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_syns": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_total_connections": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_total_rtt": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_tx_bytes": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"avg_tx_pkts": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"max_num_active_se": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"max_open_conns": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"max_rx_bytes_absolute": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"max_rx_pkts_absolute": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"max_tx_bytes_absolute": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"max_tx_pkts_absolute": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"node_obj_id": {
-				Type:     schema.TypeString,
-				Required: true,
-			},
-			"pct_application_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_connection_errors": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_connections_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_dos_bandwidth": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_dos_rx_bytes": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_network_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_pkts_dos_attacks": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"pct_policy_drops": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_conn_duration": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_connection_dropped_user_limit": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_connection_errors": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_connections_dropped": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_dup_ack_retransmits": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_end_to_end_rtt": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_end_to_end_rtt_bucket1": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_end_to_end_rtt_bucket2": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_finished_conns": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_lossy_connections": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_lossy_req": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_out_of_orders": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_packet_dropped_user_bandwidth_limit": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_rtt_valid_connections": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_sack_retransmits": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_server_flow_control": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_timeout_retransmits": {
-				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
-			},
-			"sum_zero_window_size_events": {
-				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
 			},
@@ -26831,44 +26829,44 @@ func ResourceURIParamTokenSchema() *schema.Resource {
 	}
 }
 
-func ResourceHealthMonitorHttpSchema() *schema.Resource {
+func ResourceCfgStateSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"exact_http_request": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Default:  false,
-			},
-			"http_request": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "GET / HTTP/1.0",
-			},
-			"http_response": {
-				Type:     schema.TypeString,
+			"cfg_version": {
+				Type:     schema.TypeInt,
 				Optional: true,
 				Computed: true,
 			},
-			"http_response_code": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-			},
-			"maintenance_code": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeInt},
-			},
-			"maintenance_response": {
-				Type:     schema.TypeString,
+			"cfg_version_in_flight": {
+				Type:     schema.TypeInt,
 				Optional: true,
 				Computed: true,
 			},
-			"ssl_attributes": {
+			"last_changed_time": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
-				Elem:     ResourceHealthMonitorSSLAttributesSchema(),
+				Elem:     ResourceTimeStampSchema(),
+			},
+			"reason": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"site_uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"status": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "SYSERR_SUCCESS",
+			},
+			"uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
 			},
 		},
 	}
@@ -27790,6 +27788,28 @@ func ResourceNetworkSecurityMatchTargetSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourcePortMatchSchema(),
+			},
+		},
+	}
+}
+
+func ResourcePaaLogSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"cache_hit": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
+			"client_request_body_sent": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
+			"request_logs": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourcePaaRequestLogSchema(),
 			},
 		},
 	}
