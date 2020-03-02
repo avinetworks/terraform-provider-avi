@@ -95,6 +95,11 @@ func ResourceUpgradeStatusInfoSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
+		"progress": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  0,
+		},
 		"se_upgrade_events": {
 			Type:     schema.TypeList,
 			Optional: true,

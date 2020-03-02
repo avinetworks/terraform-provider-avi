@@ -77,6 +77,10 @@ func dataSourceAviUpgradeStatusInfo() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"progress": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"se_upgrade_events": {
 				Type:     schema.TypeList,
 				Computed: true,
