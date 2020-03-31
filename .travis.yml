@@ -10,6 +10,7 @@ before_install:
   - export TRAVIS_BUILD_DIR=$HOME/gopath/src/github.com/terraform-providers/terraform-provider-avi
   - cd $HOME/gopath/src/github.com/terraform-providers/terraform-provider-avi
 
+env: GOPROXY="https://proxy.golang.org" 
 install:
 # This script is used by the Travis build to install a cookie for
 # go.googlesource.com so rate limits are higher when using `go get` to fetch
