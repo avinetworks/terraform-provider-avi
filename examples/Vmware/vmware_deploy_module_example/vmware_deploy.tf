@@ -7,7 +7,7 @@ provider "vsphere" {
 }
 
 module "vmware_deploy" {
-  source = "../../modules/services/vmware_deploy"
+  source = "../../../modules/services/vmware_deploy"
 
   vm_datastore = ""
   vsphere_cluster = ""
