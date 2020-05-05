@@ -1,9 +1,9 @@
-variable "vsphere_datacenter" {
+variable "vm_datacenter" {
   type    = string
   default = ""
 }
 
-variable "vsphere_cluster" {
+variable "vm_resource_pool" {
   type    = string
   default = ""
 }
