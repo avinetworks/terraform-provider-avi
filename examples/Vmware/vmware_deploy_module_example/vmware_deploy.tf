@@ -16,6 +16,10 @@ module "vmware_deploy" {
   vm_template = var.vm_template
   vm_name = var.vm_name
   vm_folder = var.vm_folder
+
+  avi_new_password = var.avi_new_password
+  avi_password = var.avi_password
+  avi_username = var.avi_username
 }
 
 output "controller_1" {

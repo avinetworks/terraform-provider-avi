@@ -10,3 +10,7 @@ output "vsphere_virtual_machine_vm3" {
   value = vsphere_virtual_machine.vm[2].guest_ip_addresses[0]
 }
 
+output "avi_cluster_output" {
+  value = avi_cluster.vmware_cluster
+}
+
