@@ -60,7 +60,7 @@ resource "vsphere_virtual_machine" "vm" {
 provider "avi" {
   avi_username   = var.avi_username
   avi_password   = var.avi_password
-  avi_controller = vsphere_virtual_machine.vm[0].guest_ip_addresses[0]
+  avi_controller = vsphere_virtual_machine.vm[0].default_ip_address
   avi_tenant     = "admin"
 }
 
@@ -75,21 +75,21 @@ resource "avi_cluster" "vmware_cluster" {
   nodes {
     ip {
       type = "V4"
-      addr = vsphere_virtual_machine.vm[0].guest_ip_addresses[0]
+      addr = vsphere_virtual_machine.vm[0].default_ip_address
     }
     name = vsphere_virtual_machine.vm[0].name
   }
   nodes {
     ip {
       type = "V4"
-      addr = vsphere_virtual_machine.vm[1].guest_ip_addresses[0]
+      addr = vsphere_virtual_machine.vm[1].default_ip_address
     }
     name = vsphere_virtual_machine.vm[1].name
   }
   nodes {
     ip {
       type = "V4"
-      addr = vsphere_virtual_machine.vm[2].guest_ip_addresses[0]
+      addr = vsphere_virtual_machine.vm[2].default_ip_address
     }
     name = vsphere_virtual_machine.vm[2].name
   }
