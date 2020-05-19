@@ -208,6 +208,11 @@ func ResourceCloudSchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Required: true,
 		},
+		"cloud_state_max_retry": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  60,
+		},
 	}
 }
 
@@ -252,11 +257,10 @@ func isValidCloudState(cloudState string) bool {
 }
 
 // Wait untill vcenter inventory gets completed to configure mgmt IP
-func waitForVcenterState(cloudUuid string, client *clients.AviClient) error {
+func waitForVcenterState(cloudUuid string, client *clients.AviClient, maxRetry int) error {
 	var robj interface{}
 	var err error
 	path := "api/vimgrvcenterruntime?cloud_uuid=" + cloudUuid
-	maxRetry := 50
 	i := 0
 	for ; i < maxRetry; i++ {
 		if err = client.AviSession.Get(path, &robj); err == nil {
@@ -284,12 +288,11 @@ func waitForVcenterState(cloudUuid string, client *clients.AviClient) error {
 }
 
 // Wait untill cloud state CLOUD_STATE_PLACEMENT_READY
-func checkCloudState(cloudUuid string, client *clients.AviClient) error {
+func checkCloudState(cloudUuid string, client *clients.AviClient, maxRetry int) error {
 	var robj interface{}
 	var err error
 	path := "api/cloud-inventory?uuid=" + cloudUuid
 	i := 0
-	maxRetry := 50
 	for ; i < maxRetry; i++ {
 		if err = client.AviSession.Get(path, &robj); err == nil {
 			objCount := robj.(map[string]interface{})["count"].(float64)
@@ -320,17 +323,18 @@ func resourceAviCloudCreate(d *schema.ResourceData, meta interface{}) error {
 	cloudType := d.Get("vtype")
 	vcenterConfig, isVcenterConfig := d.GetOk("vcenter_configuration")
 	if cloudType == "CLOUD_VCENTER" && isVcenterConfig {
+		maxRetry := d.Get("cloud_state_max_retry").(int)
 		mgmtNetwork := vcenterConfig.(*schema.Set).List()[0].(map[string]interface{})["management_network"].(string)
 		mgmtNetwork = "vimgrruntime?name=" + mgmtNetwork
 		if err = ApiCreateOrUpdate(d, meta, "cloud", s); err == nil {
 			if err = ResourceAviCloudRead(d, meta); err == nil {
 				client := meta.(*clients.AviClient)
 				uuid := d.Get("uuid").(string)
-				if err = waitForVcenterState(uuid, client); err == nil {
+				if err = waitForVcenterState(uuid, client, maxRetry); err == nil {
 					vcenterConfig.(*schema.Set).List()[0].(map[string]interface{})["management_network"] = mgmtNetwork
 					if err = d.Set("vcenter_configuration", vcenterConfig); err == nil {
 						if err = ApiCreateOrUpdate(d, meta, "cloud", s); err == nil {
-							err = checkCloudState(uuid, client)
+							err = checkCloudState(uuid, client, maxRetry)
 						}
 					}
 				}
@@ -348,17 +352,18 @@ func resourceAviCloudUpdate(d *schema.ResourceData, meta interface{}) error {
 	cloudType := d.Get("vtype")
 	vcenterConfig, isVcenterConfig := d.GetOk("vcenter_configuration")
 	if cloudType == "CLOUD_VCENTER" && isVcenterConfig {
+		maxRetry := d.Get("cloud_state_max_retry").(int)
 		mgmtNetwork := vcenterConfig.(*schema.Set).List()[0].(map[string]interface{})["management_network"].(string)
 		mgmtNetwork = "vimgrruntime?name=" + mgmtNetwork
 		if err = ApiCreateOrUpdate(d, meta, "cloud", s); err == nil {
 			if err = ResourceAviCloudRead(d, meta); err == nil {
 				client := meta.(*clients.AviClient)
 				uuid := d.Get("uuid").(string)
-				if err = waitForVcenterState(uuid, client); err == nil {
+				if err = waitForVcenterState(uuid, client, maxRetry); err == nil {
 					vcenterConfig.(*schema.Set).List()[0].(map[string]interface{})["management_network"] = mgmtNetwork
 					if err = d.Set("vcenter_configuration", vcenterConfig); err == nil {
 						if err = ApiCreateOrUpdate(d, meta, "cloud", s); err == nil {
-							err = checkCloudState(uuid, client)
+							err = checkCloudState(uuid, client, maxRetry)
 						}
 					}
 				}
