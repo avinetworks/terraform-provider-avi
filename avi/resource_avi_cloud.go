@@ -265,7 +265,7 @@ func waitForVcenterState(cloudUuid string, client *clients.AviClient, maxRetry i
 	for ; i < maxRetry; i++ {
 		if err = client.AviSession.Get(path, &robj); err == nil {
 			objCount := robj.(map[string]interface{})["count"].(float64)
-			if objCount == 1 {
+			if objCount == float64(1) {
 				inventoryState := robj.(map[string]interface{})["results"].([]interface{})[0].(map[string]interface{})["inventory_state"].(string)
 				if isValidCloudState(inventoryState) {
 					log.Printf("Got expected inventory state %s", inventoryState)
@@ -296,7 +296,7 @@ func checkCloudState(cloudUuid string, client *clients.AviClient, maxRetry int) 
 	for ; i < maxRetry; i++ {
 		if err = client.AviSession.Get(path, &robj); err == nil {
 			objCount := robj.(map[string]interface{})["count"].(float64)
-			if objCount == 1 {
+			if objCount == float64(1) {
 				cloudState := robj.(map[string]interface{})["results"].([]interface{})[0].(map[string]interface{})["status"].(map[string]interface{})["state"].(string)
 				if cloudState == "CLOUD_STATE_PLACEMENT_READY" {
 					break
