@@ -271,8 +271,7 @@ func waitForCloudState(cloudUuid string, client *clients.AviClient, maxRetry int
 	i := 0
 	for ; i < maxRetry; i++ {
 		if err = client.AviSession.Get(path, &robj); err == nil {
-			objCount := robj.(map[string]interface{})["count"].(float64)
-			if objCount == float64(1) {
+			if objCount := robj.(map[string]interface{})["count"].(float64); objCount == float64(1) {
 				if isCloudInventory {
 					if cloudState := robj.(map[string]interface{})["results"].([]interface{})[0].(map[string]interface{})["status"].(map[string]interface{})["state"].(string); cloudState == "CLOUD_STATE_PLACEMENT_READY" {
 						break
