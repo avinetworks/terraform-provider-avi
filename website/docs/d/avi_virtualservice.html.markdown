@@ -31,6 +31,7 @@ data "avi_virtualservice" "foo_virtualservice" {
 In addition to all arguments above, the following attributes are exported:
 
 * `active_standby_se_tag` - This configuration only applies if the virtualservice is in legacy active standby ha mode and load distribution among active standby is enabled.
+* `advertise_down_vs` - Keep advertising virtual service via bgp even if it is marked down by health monitor.
 * `allow_invalid_client_cert` - Process request even if invalid client certificate is presented.
 * `analytics_policy` - Determines analytics settings for the application.
 * `analytics_profile_ref` - Specifies settings related to analytics.
@@ -60,6 +61,7 @@ In addition to all arguments above, the following attributes are exported:
 * `fqdn` - Dns resolvable, fully qualified domain name of the virtualservice.
 * `host_name_xlate` - Translate the host name sent to the servers to this value.
 * `http_policies` - Http policies applied on the data traffic of the virtual service.
+* `icap_request_profile_refs` - The config settings for the icap server when checking the http request.
 * `ign_pool_net_reach` - Ignore pool servers network reachability constraints for virtual service placement.
 * `l4_policies` - L4 policies applied to the data traffic of the virtual service.
 * `limit_doser` - Limit potential dos attackers who exceed max_cps_per_client significantly to a fraction of max_cps_per_client for a while.

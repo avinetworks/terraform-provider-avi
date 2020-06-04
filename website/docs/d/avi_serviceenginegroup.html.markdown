@@ -36,6 +36,7 @@ In addition to all arguments above, the following attributes are exported:
 * `algo` - In compact placement, virtual services are placed on existing ses until max_vs_per_se limit is reached.
 * `allow_burst` - Allow ses to be created using burst license.
 * `app_cache_percent` - A percent value of total se memory reserved for applicationcaching.
+* `app_cache_threshold` - The max memory that can be allocated for the app cache.
 * `app_learning_memory_percent` - A percent value of total se memory reserved for application learning.
 * `archive_shm_limit` - Amount of se memory in gb until which shared memory is collected in core archive.
 * `async_ssl` - Ssl handshakes will be handled by dedicated ssl threads.requires se reboot.
@@ -101,6 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 * `max_concurrent_external_hm` - Maximum number of external health monitors that can run concurrently in a service engine.
 * `max_cpu_usage` - When cpu usage on an se exceeds this threshold, virtual services hosted on this se may be rebalanced to other ses to reduce load.
 * `max_memory_per_mempool` - Max bytes that can be allocated in a single mempool.
+* `max_num_se_dps` - Configures the maximum number of se_dp processes created on the se, requires se reboot.
 * `max_public_ips_per_lb` - Applicable to azure platform only.
 * `max_queues_per_vnic` - Maximum number of queues per vnic setting to '0' utilises all queues that are distributed across dispatcher cores.
 * `max_rules_per_lb` - Applicable to azure platform only.
@@ -130,9 +132,11 @@ In addition to all arguments above, the following attributes are exported:
 * `placement_mode` - If placement mode is 'auto', virtual services are automatically placed on service engines.
 * `realtime_se_metrics` - Enable or disable real time se metrics.
 * `reboot_on_panic` - Reboot the vm or host on kernel panic.
+* `resync_time_interval` - Time interval to re-sync se's time with wall clock time.
 * `se_bandwidth_type` - Select the se bandwidth for the bandwidth license.
 * `se_deprovision_delay` - Duration to preserve unused service engine virtual machines before deleting them.
 * `se_dos_profile` - Dict settings for serviceenginegroup.
+* `se_dp_max_hb_version` - The highest supported se-se heartbeat protocol version.
 * `se_dp_vnic_queue_stall_event_sleep` - Time (in seconds) service engine waits for after generating a vnic transmit queue stall event before resetting thenic.
 * `se_dp_vnic_queue_stall_threshold` - Number of consecutive transmit failures to look for before generating a vnic transmit queue stall event.
 * `se_dp_vnic_queue_stall_timeout` - Time (in milliseconds) to wait for network/nic recovery on detecting a transmit queue stall after which service engine resets the nic.
@@ -141,7 +145,7 @@ In addition to all arguments above, the following attributes are exported:
 * `se_dpdk_pmd` - Determines if dpdk pool mode driver should be used or not   0  automatically determine based on hypervisor/nic type 1  unconditionally use dpdk poll mode driver 2  don't use dpdk poll mode driver.requires se reboot.
 * `se_flow_probe_retries` - Flow probe retry count if no replies are received.requires se reboot.
 * `se_flow_probe_retry_timer` - Timeout in milliseconds for flow probe retries.requires se reboot.
-* `se_ipc_udp_port` - Udp port for se_dp ipc in docker bridge mode.
+* `se_hyperthreaded_mode` - Controls the distribution of se data path processes on cpus which support hyper-threading.
 * `se_kni_burst_factor` - Knob to control burst size used in polling kni interfaces for traffic sent from kni towards dpdk application also controls burst size used by kni module to read pkts punted from dpdk application towards kni helps minimize drops in non-vip traffic in either pathfactor of (0-2) multiplies/divides burst size by 2^n.
 * `se_lro` - Enable or disable large receive optimization for vnics.
 * `se_mtu` - Mtu for the vnics of ses in the se group.
@@ -153,7 +157,7 @@ In addition to all arguments above, the following attributes are exported:
 * `se_pcap_reinit_frequency` - Frequency in seconds at which periodically a pcap reinit check is triggered.
 * `se_pcap_reinit_threshold` - Threshold for input packet receive errors in pcap mode exceeding which a pcap reinit is triggered.
 * `se_probe_port` - Tcp port on se where echo service will be run.
-* `se_remote_punt_udp_port` - Udp port for punted packets in docker bridge mode.
+* `se_rl_prop` - Rate limiter properties.
 * `se_rum_sampling_nav_interval` - Minimum time to wait on server between taking sampleswhen sampling the navigation timing data from the end user client.
 * `se_rum_sampling_nav_percent` - Percentage of navigation timing data from the end user client, used for sampling to get client insights.
 * `se_rum_sampling_res_interval` - Minimum time to wait on server between taking sampleswhen sampling the resource timing data from the end user client.
@@ -177,6 +181,7 @@ In addition to all arguments above, the following attributes are exported:
 * `ssl_preprocess_sni_hostname` - (beta) preprocess ssl client hello for sni hostname extension.if set to true, this will apply sni child's ssl protocol(s), if they are different from sni parent's allowed ssl protocol(s).
 * `tenant_ref` - It is a reference to an object of type tenant.
 * `udf_log_throttle` - This setting limits the number of udf logs generated per second per core on this se.
+* `use_hyperthreaded_cores` - Enables the use of hyper-threaded cores on se.
 * `use_standard_alb` - Use standard sku azure load balancer.
 * `uuid` - Unique object identifier of the object.
 * `vcenter_clusters` - Dict settings for serviceenginegroup.

@@ -35,6 +35,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"app_cache_threshold": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"app_learning_memory_percent": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -302,6 +306,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"max_num_se_dps": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"max_public_ips_per_lb": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -422,6 +430,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"resync_time_interval": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"se_bandwidth_type": {
 				Type:     schema.TypeString,
 				Computed: true,
@@ -434,6 +446,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeSet,
 				Computed: true,
 				Elem:     ResourceDosThresholdProfileSchema(),
+			},
+			"se_dp_max_hb_version": {
+				Type:     schema.TypeInt,
+				Computed: true,
 			},
 			"se_dp_vnic_queue_stall_event_sleep": {
 				Type:     schema.TypeInt,
@@ -467,8 +483,8 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
-			"se_ipc_udp_port": {
-				Type:     schema.TypeInt,
+			"se_hyperthreaded_mode": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 			"se_kni_burst_factor": {
@@ -515,9 +531,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
-			"se_remote_punt_udp_port": {
-				Type:     schema.TypeInt,
+			"se_rl_prop": {
+				Type:     schema.TypeSet,
 				Computed: true,
+				Elem:     ResourceRateLimiterPropertiesSchema(),
 			},
 			"se_rum_sampling_nav_interval": {
 				Type:     schema.TypeInt,
@@ -613,6 +630,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"udf_log_throttle": {
 				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"use_hyperthreaded_cores": {
+				Type:     schema.TypeBool,
 				Computed: true,
 			},
 			"use_standard_alb": {

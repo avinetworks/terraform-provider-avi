@@ -20,8 +20,6 @@ func TestAVIDataSourceServiceEngineGroupBasic(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"avi_serviceenginegroup.testServiceEngineGroup", "udf_log_throttle", "100"),
 					resource.TestCheckResourceAttr(
-						"avi_serviceenginegroup.testServiceEngineGroup", "se_ipc_udp_port", "1500"),
-					resource.TestCheckResourceAttr(
 						"avi_serviceenginegroup.testServiceEngineGroup", "se_vs_hb_max_vs_in_pkt", "256"),
 					resource.TestCheckResourceAttr(
 						"avi_serviceenginegroup.testServiceEngineGroup", "vcpus_per_se", "1"),
@@ -61,8 +59,6 @@ func TestAVIDataSourceServiceEngineGroupBasic(t *testing.T) {
 						"avi_serviceenginegroup.testServiceEngineGroup", "disable_tso", "false"),
 					resource.TestCheckResourceAttr(
 						"avi_serviceenginegroup.testServiceEngineGroup", "se_sb_threads", "1"),
-					resource.TestCheckResourceAttr(
-						"avi_serviceenginegroup.testServiceEngineGroup", "se_remote_punt_udp_port", "1501"),
 					resource.TestCheckResourceAttr(
 						"avi_serviceenginegroup.testServiceEngineGroup", "ignore_rtt_threshold", "5000"),
 					resource.TestCheckResourceAttr(
@@ -156,7 +152,6 @@ data "avi_cloud" "default_cloud" {
 resource "avi_serviceenginegroup" "testServiceEngineGroup" {
 	archive_shm_limit = "8"
 	udf_log_throttle = "100"
-	se_ipc_udp_port = "1500"
 	se_vs_hb_max_vs_in_pkt = "256"
 	vcpus_per_se = "1"
 	hm_on_standby = true
@@ -181,7 +176,6 @@ resource "avi_serviceenginegroup" "testServiceEngineGroup" {
 	disable_tso = false
 	ha_mode = "HA_MODE_SHARED"
 	se_sb_threads = "1"
-	se_remote_punt_udp_port = "1501"
 	ignore_rtt_threshold = "5000"
 	active_standby = false
 	distribute_queues = false

@@ -42,7 +42,12 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 		"app_cache_percent": {
 			Type:     schema.TypeInt,
 			Optional: true,
-			Default:  0,
+			Default:  10,
+		},
+		"app_cache_threshold": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  5,
 		},
 		"app_learning_memory_percent": {
 			Type:     schema.TypeInt,
@@ -369,6 +374,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  64,
 		},
+		"max_num_se_dps": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Computed: true,
+		},
 		"max_public_ips_per_lb": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -515,6 +525,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  true,
 		},
+		"resync_time_interval": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  65536,
+		},
 		"se_bandwidth_type": {
 			Type:     schema.TypeString,
 			Optional: true,
@@ -530,6 +545,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 			Elem:     ResourceDosThresholdProfileSchema(),
+		},
+		"se_dp_max_hb_version": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  2,
 		},
 		"se_dp_vnic_queue_stall_event_sleep": {
 			Type:     schema.TypeInt,
@@ -571,10 +591,10 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  40,
 		},
-		"se_ipc_udp_port": {
-			Type:     schema.TypeInt,
+		"se_hyperthreaded_mode": {
+			Type:     schema.TypeString,
 			Optional: true,
-			Default:  1500,
+			Default:  "SE_CPU_HT_AUTO",
 		},
 		"se_kni_burst_factor": {
 			Type:     schema.TypeInt,
@@ -631,10 +651,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  7,
 		},
-		"se_remote_punt_udp_port": {
-			Type:     schema.TypeInt,
+		"se_rl_prop": {
+			Type:     schema.TypeSet,
 			Optional: true,
-			Default:  1501,
+			Computed: true,
+			Elem:     ResourceRateLimiterPropertiesSchema(),
 		},
 		"se_rum_sampling_nav_interval": {
 			Type:     schema.TypeInt,
@@ -751,6 +772,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  100,
+		},
+		"use_hyperthreaded_cores": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
 		},
 		"use_standard_alb": {
 			Type:     schema.TypeBool,
