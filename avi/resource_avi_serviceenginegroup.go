@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+	"time"
 )
 
 func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
@@ -923,10 +924,24 @@ func resourceAviServiceEngineGroupUpdate(d *schema.ResourceData, meta interface{
 
 func resourceAviServiceEngineGroupDelete(d *schema.ResourceData, meta interface{}) error {
 	objType := "serviceenginegroup"
+	client := meta.(*clients.AviClient)
+	if cloudRef, ok := d.GetOk("cloud_ref"); ok && strings.Contains(cloudRef.(string), "api/cloud/") {
+		cloudUUID := strings.SplitN(cloudRef.(string), "api/cloud/", 2)[1]
+		cloudPath := "api/cloud/" + cloudUUID
+		var robj interface{}
+		if err := client.AviSession.Get(cloudPath, &robj); err == nil {
+			if vcenterConfig, isVcenterConfig := robj.(map[string]interface{})["vcenter_configuration"]; isVcenterConfig {
+				if privilege := vcenterConfig.(map[string]interface{})["privilege"].(string); privilege == "WRITE_ACCESS" {
+					seDeprovisionDelay := d.Get("se_deprovision_delay").(int) + 2
+					log.Printf("Waiting to delete SE Group")
+					time.Sleep(time.Duration(seDeprovisionDelay) * time.Minute)
+				}
+			}
+		}
+	}
 	if ApiDeleteSystemDefaultCheck(d) {
 		return nil
 	}
-	client := meta.(*clients.AviClient)
 	uuid := d.Get("uuid").(string)
 	if uuid != "" {
 		path := "api/" + objType + "/" + uuid
