@@ -37,7 +37,8 @@ notifications:
   email:
     recipients:
       - rastogiga@vmware.com
-      - chaitanya.deshpande@avinetworks.com
-      - shrikant.patil@avinetworks.com
-      - rohan.suryawanshi@avinetworks.com
+      - deshpandech@vmware.com
+      - jmanoj@vmware.com
+      - pshrikan@vmware.com
+      - mayanksh@vmware.com
     on_failure: always
