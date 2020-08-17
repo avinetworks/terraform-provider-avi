@@ -23,10 +23,6 @@ func dataSourceAviNetworkSecurityPolicy() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"ip_reputation_db_ref": {
-				Type:     schema.TypeString,
-				Computed: true,
-			},
 			"name": {
 				Type:     schema.TypeString,
 				Optional: true,
