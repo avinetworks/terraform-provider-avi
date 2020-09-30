@@ -28,17 +28,16 @@ script:
 branches:
   only:
   - master
-  - 18.2.10
 matrix:
   fast_finish: true
   allow_failures:
   - go: tip
 
-#notifications:
-#  email:
-#    recipients:
-#      - rastogiga@vmware.com
-#      - chaitanya.deshpande@avinetworks.com
-#      - shrikant.patil@avinetworks.com
-#      - rohan.suryawanshi@avinetworks.com
-#    on_failure: always
+notifications:
+  email:
+    recipients:
+      - rastogiga@vmware.com
+      - chaitanya.deshpande@avinetworks.com
+      - shrikant.patil@avinetworks.com
+      - rohan.suryawanshi@avinetworks.com
+    on_failure: always
