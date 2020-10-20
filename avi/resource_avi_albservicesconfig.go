@@ -32,6 +32,11 @@ func ResourceALBServicesConfigSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourceIpReputationConfigSchema(),
 		},
+		"mode": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Default:  "SALESFORCE",
+		},
 		"polling_interval": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -58,6 +63,11 @@ func ResourceALBServicesConfigSchema() map[string]*schema.Schema {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  false,
+		},
+		"use_tls": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
 		},
 		"uuid": {
 			Type:     schema.TypeString,

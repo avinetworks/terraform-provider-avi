@@ -97,27 +97,27 @@ func dataSourceAviAnalyticsProfile() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"disable_ondemand_metrics": {
-				Type:     schema.TypeBool,
-				Computed: true,
-			},
-			"disable_se_analytics": {
-				Type:     schema.TypeBool,
-				Computed: true,
-			},
-			"disable_server_analytics": {
-				Type:     schema.TypeBool,
-				Computed: true,
-			},
-			"disable_vs_analytics": {
-				Type:     schema.TypeBool,
-				Computed: true,
-			},
 			"enable_adaptive_config": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
 			"enable_advanced_analytics": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"enable_ondemand_metrics": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"enable_se_analytics": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"enable_server_analytics": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"enable_vs_analytics": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
@@ -310,6 +310,11 @@ func dataSourceAviAnalyticsProfile() *schema.Resource {
 			"hs_security_weak_signature_algo_penalty": {
 				Type:     schema.TypeFloat,
 				Computed: true,
+			},
+			"labels": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem:     ResourceKeyValueSchema(),
 			},
 			"name": {
 				Type:     schema.TypeString,

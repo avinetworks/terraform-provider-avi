@@ -24,10 +24,19 @@ func dataSourceAviVSDataScriptSet() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"ip_reputation_db_ref": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
 			"ipgroup_refs": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"labels": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem:     ResourceKeyValueSchema(),
 			},
 			"name": {
 				Type:     schema.TypeString,

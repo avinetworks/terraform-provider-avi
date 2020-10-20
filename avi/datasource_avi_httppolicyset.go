@@ -38,9 +38,18 @@ func dataSourceAviHTTPPolicySet() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceHTTPSecurityPolicySchema(),
 			},
+			"ip_reputation_db_ref": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
 			"is_internal_policy": {
 				Type:     schema.TypeBool,
 				Computed: true,
+			},
+			"labels": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem:     ResourceKeyValueSchema(),
 			},
 			"name": {
 				Type:     schema.TypeString,

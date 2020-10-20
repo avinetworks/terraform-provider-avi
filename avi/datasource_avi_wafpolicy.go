@@ -15,6 +15,11 @@ func dataSourceAviWafPolicy() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"allowlist": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceWafPolicyAllowlistSchema(),
+			},
 			"application_signatures": {
 				Type:     schema.TypeSet,
 				Computed: true,
@@ -53,6 +58,11 @@ func dataSourceAviWafPolicy() *schema.Resource {
 			"failure_mode": {
 				Type:     schema.TypeString,
 				Computed: true,
+			},
+			"labels": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem:     ResourceKeyValueSchema(),
 			},
 			"learning_params": {
 				Type:     schema.TypeSet,
@@ -108,11 +118,6 @@ func dataSourceAviWafPolicy() *schema.Resource {
 			"waf_profile_ref": {
 				Type:     schema.TypeString,
 				Computed: true,
-			},
-			"whitelist": {
-				Type:     schema.TypeSet,
-				Computed: true,
-				Elem:     ResourceWafPolicyWhitelistSchema(),
 			},
 		},
 	}

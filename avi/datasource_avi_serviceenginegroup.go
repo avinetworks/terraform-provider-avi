@@ -162,6 +162,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"disable_flow_probes": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"disable_gro": {
 				Type:     schema.TypeBool,
 				Computed: true,
@@ -188,6 +192,22 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"distribute_vnics": {
 				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"dp_aggressive_hb_frequency": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"dp_aggressive_hb_timeout_count": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"dp_hb_frequency": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"dp_hb_timeout_count": {
+				Type:     schema.TypeInt,
 				Computed: true,
 			},
 			"enable_gratarp_permanent": {
@@ -229,6 +249,11 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			"free_list_size": {
 				Type:     schema.TypeInt,
 				Computed: true,
+			},
+			"gcp_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceGCPSeGroupConfigSchema(),
 			},
 			"gratarp_permanent_periodicity": {
 				Type:     schema.TypeInt,
@@ -311,6 +336,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"log_disksz": {
 				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"log_malloc_failure": {
+				Type:     schema.TypeBool,
 				Computed: true,
 			},
 			"max_concurrent_external_hm": {
@@ -432,6 +461,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"pcap_tx_ring_rd_balancing_factor": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"per_app": {
 				Type:     schema.TypeBool,
 				Computed: true,
@@ -457,6 +490,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"se_delayed_flow_delete": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"se_deprovision_delay": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -465,6 +502,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeSet,
 				Computed: true,
 				Elem:     ResourceDosThresholdProfileSchema(),
+			},
+			"se_dp_hm_drops": {
+				Type:     schema.TypeInt,
+				Computed: true,
 			},
 			"se_dp_max_hb_version": {
 				Type:     schema.TypeInt,
@@ -502,6 +543,11 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"se_group_analytics_policy": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceSeGroupAnalyticsPolicySchema(),
+			},
 			"se_hyperthreaded_mode": {
 				Type:     schema.TypeString,
 				Computed: true,
@@ -512,6 +558,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"se_lro": {
 				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"se_mp_ring_retry_count": {
+				Type:     schema.TypeInt,
 				Computed: true,
 			},
 			"se_mtu": {
@@ -597,6 +647,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 			},
 			"se_tx_batch_size": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"se_txq_threshold": {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},

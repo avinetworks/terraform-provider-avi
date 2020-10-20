@@ -14,6 +14,11 @@ import (
 
 func ResourceIcapProfileSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"allow_204": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
 		"buffer_size": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -62,7 +67,7 @@ func ResourceIcapProfileSchema() map[string]*schema.Schema {
 		"response_timeout": {
 			Type:     schema.TypeInt,
 			Optional: true,
-			Default:  1000,
+			Default:  60000,
 		},
 		"service_uri": {
 			Type:     schema.TypeString,
@@ -72,7 +77,7 @@ func ResourceIcapProfileSchema() map[string]*schema.Schema {
 		"slow_response_warning_threshold": {
 			Type:     schema.TypeInt,
 			Optional: true,
-			Default:  500,
+			Default:  10000,
 		},
 		"tenant_ref": {
 			Type:     schema.TypeString,

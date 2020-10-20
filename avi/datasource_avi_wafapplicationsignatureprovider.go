@@ -16,6 +16,11 @@ func dataSourceAviWafApplicationSignatureProvider() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"service_status": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceWebApplicationSignatureServiceStatusSchema(),
+			},
 			"tenant_ref": {
 				Type:     schema.TypeString,
 				Optional: true,

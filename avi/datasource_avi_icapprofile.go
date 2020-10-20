@@ -11,6 +11,10 @@ func dataSourceAviIcapProfile() *schema.Resource {
 	return &schema.Resource{
 		Read: ResourceAviIcapProfileRead,
 		Schema: map[string]*schema.Schema{
+			"allow_204": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"buffer_size": {
 				Type:     schema.TypeInt,
 				Computed: true,
