@@ -121,32 +121,32 @@ func ResourceAnalyticsProfileSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
-		"disable_ondemand_metrics": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
-		},
-		"disable_se_analytics": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
-		},
-		"disable_server_analytics": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
-		},
-		"disable_vs_analytics": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
-		},
 		"enable_adaptive_config": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,
 		},
 		"enable_advanced_analytics": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
+		"enable_ondemand_metrics": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
+		"enable_se_analytics": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
+		"enable_server_analytics": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
+		"enable_vs_analytics": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,

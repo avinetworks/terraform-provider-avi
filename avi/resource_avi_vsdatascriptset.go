@@ -29,6 +29,11 @@ func ResourceVSDataScriptSetSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
+		"ip_reputation_db_ref": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+		},
 		"ipgroup_refs": {
 			Type:     schema.TypeList,
 			Optional: true,

@@ -64,6 +64,11 @@ func ResourceALBServicesConfigSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  false,
 		},
+		"use_tls": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
 		"uuid": {
 			Type:     schema.TypeString,
 			Optional: true,

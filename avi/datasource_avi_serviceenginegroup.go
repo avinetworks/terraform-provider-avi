@@ -162,6 +162,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"disable_flow_probes": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"disable_gro": {
 				Type:     schema.TypeBool,
 				Computed: true,
@@ -188,6 +192,22 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"distribute_vnics": {
 				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"dp_aggressive_hb_frequency": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"dp_aggressive_hb_timeout_count": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"dp_hb_frequency": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"dp_hb_timeout_count": {
+				Type:     schema.TypeInt,
 				Computed: true,
 			},
 			"enable_gratarp_permanent": {
@@ -229,6 +249,11 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			"free_list_size": {
 				Type:     schema.TypeInt,
 				Computed: true,
+			},
+			"gcp_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceGCPSeGroupConfigSchema(),
 			},
 			"gratarp_permanent_periodicity": {
 				Type:     schema.TypeInt,
@@ -436,6 +461,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"pcap_tx_ring_rd_balancing_factor": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"per_app": {
 				Type:     schema.TypeBool,
 				Computed: true,
@@ -474,6 +503,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceDosThresholdProfileSchema(),
 			},
+			"se_dp_hm_drops": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"se_dp_max_hb_version": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -509,6 +542,11 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			"se_flow_probe_retry_timer": {
 				Type:     schema.TypeInt,
 				Computed: true,
+			},
+			"se_group_analytics_policy": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceSeGroupAnalyticsPolicySchema(),
 			},
 			"se_hyperthreaded_mode": {
 				Type:     schema.TypeString,

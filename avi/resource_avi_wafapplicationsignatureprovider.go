@@ -19,6 +19,12 @@ func ResourceWafApplicationSignatureProviderSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
+		"service_status": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem:     ResourceWebApplicationSignatureServiceStatusSchema(),
+		},
 		"tenant_ref": {
 			Type:     schema.TypeString,
 			Optional: true,

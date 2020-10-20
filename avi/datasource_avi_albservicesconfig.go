@@ -52,6 +52,10 @@ func dataSourceAviALBServicesConfig() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"use_tls": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"uuid": {
 				Type:     schema.TypeString,
 				Optional: true,

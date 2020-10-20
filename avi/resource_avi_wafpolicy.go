@@ -19,6 +19,12 @@ func ResourceWafPolicySchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  true,
 		},
+		"allowlist": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem:     ResourceWafPolicyAllowlistSchema(),
+		},
 		"application_signatures": {
 			Type:     schema.TypeSet,
 			Optional: true,
@@ -131,12 +137,6 @@ func ResourceWafPolicySchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Optional: true,
 			Computed: true,
-		},
-		"whitelist": {
-			Type:     schema.TypeSet,
-			Optional: true,
-			Computed: true,
-			Elem:     ResourceWafPolicyWhitelistSchema(),
 		},
 	}
 }

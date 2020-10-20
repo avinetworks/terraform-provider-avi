@@ -47,6 +47,11 @@ func ResourceHTTPPolicySetSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourceHTTPSecurityPolicySchema(),
 		},
+		"ip_reputation_db_ref": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+		},
 		"is_internal_policy": {
 			Type:     schema.TypeBool,
 			Optional: true,
