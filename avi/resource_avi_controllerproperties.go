@@ -169,6 +169,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  3,
 		},
+		"max_threads_cc_vip_bg_worker": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  20,
+		},
 		"permission_scoped_shared_admin_networks": {
 			Type:     schema.TypeBool,
 			Optional: true,

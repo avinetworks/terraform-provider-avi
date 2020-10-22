@@ -135,6 +135,10 @@ func dataSourceAviControllerProperties() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"max_threads_cc_vip_bg_worker": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"permission_scoped_shared_admin_networks": {
 				Type:     schema.TypeBool,
 				Computed: true,

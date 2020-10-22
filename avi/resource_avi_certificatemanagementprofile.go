@@ -18,14 +18,15 @@ func ResourceCertificateManagementProfileSchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Required: true,
 		},
+		"run_script_ref": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+		},
 		"script_params": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem:     ResourceCustomParamsSchema(),
-		},
-		"script_path": {
-			Type:     schema.TypeString,
-			Required: true,
 		},
 		"tenant_ref": {
 			Type:     schema.TypeString,

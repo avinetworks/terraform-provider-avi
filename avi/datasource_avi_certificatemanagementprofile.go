@@ -16,14 +16,14 @@ func dataSourceAviCertificateManagementProfile() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"run_script_ref": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
 			"script_params": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem:     ResourceCustomParamsSchema(),
-			},
-			"script_path": {
-				Type:     schema.TypeString,
-				Computed: true,
 			},
 			"tenant_ref": {
 				Type:     schema.TypeString,
