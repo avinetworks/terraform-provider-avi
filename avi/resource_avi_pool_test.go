@@ -123,6 +123,25 @@ resource "avi_pool" "testPool" {
 		type = "FAIL_ACTION_CLOSE_CONN"
 	}
 }
+resource "avi_pool" "testPoolHmRef" {
+        name = "test-pool-hm-ref"
+	tenant_ref = data.avi_tenant.default_tenant.id
+	cloud_ref = data.avi_cloud.default_cloud.id
+	ignore_servers = false
+	servers {
+	ratio = "1"
+	ip {
+		type = "V4"
+		addr = "10.90.64.66"
+	}
+	hostname = "10.90.64.66"
+	port = "8080"
+	enabled = true
+}
+	fail_action {
+		type = "FAIL_ACTION_CLOSE_CONN"
+	}
+}
 `
 
 const testAccAVIPoolupdatedConfig = `
@@ -141,6 +160,25 @@ resource "avi_pool" "testPool" {
 	cloud_ref = data.avi_cloud.default_cloud.id
 	ignore_servers = false
 	health_monitor_refs = [data.avi_healthmonitor.default_monitor.id]
+	servers {
+	ratio = "1"
+	ip {
+		type = "V4"
+		addr = "10.90.64.66"
+	}
+	hostname = "10.90.64.66"
+	port = "8080"
+	enabled = true
+}
+	fail_action {
+		type = "FAIL_ACTION_CLOSE_CONN"
+	}
+}
+resource "avi_pool" "testPoolHmRef" {
+        name = "test-pool-hm-ref-updated"
+	tenant_ref = data.avi_tenant.default_tenant.id
+	cloud_ref = data.avi_cloud.default_cloud.id
+	ignore_servers = false
 	servers {
 	ratio = "1"
 	ip {

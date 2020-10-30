@@ -1977,6 +1977,11 @@ func ResourceAuthMappingRuleSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"assign_userprofile": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
 			"attribute_match": {
 				Type:     schema.TypeSet,
 				Optional: true,
@@ -2022,6 +2027,16 @@ func ResourceAuthMappingRuleSchema() *schema.Resource {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"userprofile_attribute_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"userprofile_ref": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
 			},
 		},
 	}
@@ -5267,6 +5282,11 @@ func ResourceConfigUserAuthrzByRuleSchema() *schema.Resource {
 				Computed: true,
 			},
 			"user": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"userprofile": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -9793,11 +9813,23 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceSeVsFaultEventDetailsSchema(),
 			},
+			"se_vs_pkt_buf_high_event_details": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceSeVsPktBufHighEventDetailsSchema(),
+			},
 			"sec_mgr_data_event": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceSecMgrDataEventSchema(),
+			},
+			"secure_key_exchange_info": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceSecureKeyExchangeDetailsSchema(),
 			},
 			"semigrate_event_details": {
 				Type:     schema.TypeSet,
@@ -15036,6 +15068,11 @@ func ResourceIpamDnsInternalProfileSchema() *schema.Resource {
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
+			"usable_networks": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceIpamUsableNetworkSchema(),
+			},
 		},
 	}
 }
@@ -15138,6 +15175,23 @@ func ResourceIpamDnsTencentProfileSchema() *schema.Resource {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     ResourceTencentZoneNetworkSchema(),
+			},
+		},
+	}
+}
+
+func ResourceIpamUsableNetworkSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"labels": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceKeyValueTupleSchema(),
+			},
+			"nw_ref": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
 			},
 		},
 	}
@@ -15264,6 +15318,23 @@ func ResourceKeyValueSchema() *schema.Resource {
 			"key": {
 				Type:     schema.TypeString,
 				Required: true,
+			},
+			"value": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceKeyValueTupleSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"key": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
 			},
 			"value": {
 				Type:     schema.TypeString,
@@ -17724,6 +17795,11 @@ func ResourceNetworkRuntimeSchema() *schema.Resource {
 			"name": {
 				Type:     schema.TypeString,
 				Required: true,
+			},
+			"obj_uuids": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"se_uuid": {
 				Type:     schema.TypeList,
@@ -25105,6 +25181,28 @@ func ResourceSeVsFaultEventDetailsSchema() *schema.Resource {
 	}
 }
 
+func ResourceSeVsPktBufHighEventDetailsSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"current_value": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"threshold": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"virtual_service": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceSecMgrDataEventSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -25210,6 +25308,11 @@ func ResourceSecureChannelMappingSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"metadata": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceSecureChannelMetadataSchema(),
+			},
 			"name": {
 				Type:     schema.TypeString,
 				Required: true,
@@ -25286,6 +25389,63 @@ func ResourceSecureChannelTokenSchema() *schema.Resource {
 	}
 }
 
+func ResourceSecureKeyExchangeDetailsSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"ctlr_mgmt_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"ctlr_public_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"error": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"follower_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"leader_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"se_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"source_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"status": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceSecurityMgrDebugFilterSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -25310,6 +25470,23 @@ func ResourceSecurityMgrRuntimeSchema() *schema.Resource {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     ResourceSecMgrThresholdSchema(),
+			},
+		},
+	}
+}
+
+func ResourceSelectorSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"labels": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceKeyValueTupleSchema(),
+			},
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
 			},
 		},
 	}
@@ -26284,6 +26461,74 @@ func ResourceStateCacheMgrDebugFilterSchema() *schema.Resource {
 	}
 }
 
+func ResourceStaticIpAllocInfoSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"ip": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceIpAddrSchema(),
+			},
+			"obj_info": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"obj_uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceStaticIpRangeSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"range": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceIpAddrRangeSchema(),
+			},
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "STATIC_IPS_FOR_VIP_AND_SE",
+			},
+		},
+	}
+}
+
+func ResourceStaticIpRangeRuntimeSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"allocated_ips": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceStaticIpAllocInfoSchema(),
+			},
+			"free_ip_count": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"total_ip_count": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "STATIC_IPS_FOR_VIP_AND_SE",
+			},
+		},
+	}
+}
+
 func ResourceStaticRouteSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -26406,6 +26651,11 @@ func ResourceSubnetSchema() *schema.Resource {
 				Required: true,
 				Elem:     ResourceIpAddrPrefixSchema(),
 			},
+			"static_ip_ranges": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceStaticIpRangeSchema(),
+			},
 			"static_ips": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -26432,6 +26682,11 @@ func ResourceSubnetRuntimeSchema() *schema.Resource {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     ResourceIpAllocInfoSchema(),
+			},
+			"ip_range_runtimes": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceStaticIpRangeRuntimeSchema(),
 			},
 			"prefix": {
 				Type:     schema.TypeSet,

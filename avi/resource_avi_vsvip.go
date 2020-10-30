@@ -29,6 +29,12 @@ func ResourceVsVipSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  false,
 		},
+		"ipam_selector": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem:     ResourceSelectorSchema(),
+		},
 		"labels": {
 			Type:     schema.TypeList,
 			Optional: true,

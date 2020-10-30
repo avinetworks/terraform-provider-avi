@@ -47,6 +47,11 @@ func ResourceSystemConfigurationSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourceEmailConfigurationSchema(),
 		},
+		"enable_cors": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
+		},
 		"fips_mode": {
 			Type:     schema.TypeBool,
 			Optional: true,
