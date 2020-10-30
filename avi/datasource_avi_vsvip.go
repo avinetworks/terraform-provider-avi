@@ -25,6 +25,11 @@ func dataSourceAviVsVip() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"ipam_selector": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceSelectorSchema(),
+			},
 			"labels": {
 				Type:     schema.TypeList,
 				Computed: true,
