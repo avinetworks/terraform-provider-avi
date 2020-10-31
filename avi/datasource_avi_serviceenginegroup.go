@@ -414,6 +414,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"pcap_tx_ring_rd_balancing_factor": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"per_app": {
 				Type:     schema.TypeBool,
 				Computed: true,
@@ -433,6 +437,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"se_bandwidth_type": {
 				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"se_delayed_flow_delete": {
+				Type:     schema.TypeBool,
 				Computed: true,
 			},
 			"se_deprovision_delay": {
@@ -486,6 +494,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"se_lro": {
 				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"se_mp_ring_retry_count": {
+				Type:     schema.TypeInt,
 				Computed: true,
 			},
 			"se_mtu": {
@@ -575,6 +587,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 			},
 			"se_tx_batch_size": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"se_txq_threshold": {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
