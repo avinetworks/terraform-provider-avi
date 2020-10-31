@@ -39,6 +39,10 @@ func dataSourceAviSystemConfiguration() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceEmailConfigurationSchema(),
 			},
+			"enable_cors": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"fips_mode": {
 				Type:     schema.TypeBool,
 				Computed: true,
