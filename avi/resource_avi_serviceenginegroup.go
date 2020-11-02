@@ -505,11 +505,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  "PCAP_TX_AUTO",
 		},
-		"pcap_tx_ring_rd_balancing_factor": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Default:  10,
-		},
 		"per_app": {
 			Type:     schema.TypeBool,
 			Optional: true,
@@ -535,11 +530,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Optional: true,
 			Computed: true,
-		},
-		"se_delayed_flow_delete": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  true,
 		},
 		"se_deprovision_delay": {
 			Type:     schema.TypeInt,
@@ -606,11 +596,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,
-		},
-		"se_mp_ring_retry_count": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Default:  500,
 		},
 		"se_mtu": {
 			Type:     schema.TypeInt,
@@ -723,11 +708,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  64,
-		},
-		"se_txq_threshold": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Default:  2048,
 		},
 		"se_udp_encap_ipc": {
 			Type:     schema.TypeInt,
