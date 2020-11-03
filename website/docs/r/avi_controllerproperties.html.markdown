@@ -36,6 +36,8 @@ The following arguments are supported:
 * `api_idle_timeout` - (Optional) Allowed values are 0-1440.
 * `api_perf_logging_threshold` - (Optional) Threshold to log request timing in portal_performance.log and server-timing response header.
 * `appviewx_compat_mode` - (Optional) Export configuration in appviewx compatibility mode.
+* `async_patch_merge_period` - (Optional) Period for which asynchronous patch requests are queued.
+* `async_patch_request_cleanup_duration` - (Optional) Duration for which asynchronous patch requests should be kept, after being marked as success or fail.
 * `attach_ip_retry_interval` - (Optional) Placeholder for description of property attach_ip_retry_interval of obj type controllerproperties field type integer  type int.
 * `attach_ip_retry_limit` - (Optional) Placeholder for description of property attach_ip_retry_limit of obj type controllerproperties field type integer  type int.
 * `bm_use_ansible` - (Optional) Use ansible for se creation in baremetal.

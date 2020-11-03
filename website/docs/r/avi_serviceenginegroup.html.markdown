@@ -127,11 +127,13 @@ The following arguments are supported:
 * `openstack_mgmt_network_uuid` - (Optional) Management network uuid.
 * `os_reserved_memory` - (Optional) Amount of extra memory to be reserved for use by the operating system on a service engine.
 * `pcap_tx_mode` - (Optional) Determines the pcap transmit mode of operation.
+* `pcap_tx_ring_rd_balancing_factor` - (Optional) In pcap mode, reserve a configured portion of tx ring resources for itself and  the remaining portion for the rx ring to achieve better balance in terms of queue depth.
 * `per_app` - (Optional) Per-app se mode is designed for deploying dedicated load balancers per app (vs).
 * `placement_mode` - (Optional) If placement mode is 'auto', virtual services are automatically placed on service engines.
 * `realtime_se_metrics` - (Optional) Enable or disable real time se metrics.
 * `reboot_on_panic` - (Optional) Reboot the vm or host on kernel panic.
 * `se_bandwidth_type` - (Optional) Select the se bandwidth for the bandwidth license.
+* `se_delayed_flow_delete` - (Optional) Delay the cleanup of flowtable entry.
 * `se_deprovision_delay` - (Optional) Duration to preserve unused service engine virtual machines before deleting them.
 * `se_dos_profile` - (Optional) Dict settings for serviceenginegroup.
 * `se_dp_vnic_queue_stall_event_sleep` - (Optional) Time (in seconds) service engine waits for after generating a vnic transmit queue stall event before resetting thenic.
@@ -145,6 +147,7 @@ The following arguments are supported:
 * `se_ipc_udp_port` - (Optional) Udp port for se_dp ipc in docker bridge mode.
 * `se_kni_burst_factor` - (Optional) Knob to control burst size used in polling kni interfaces for traffic sent from kni towards dpdk application also controls burst size used by kni module to read pkts punted from dpdk application towards kni helps minimize drops in non-vip traffic in either pathfactor of (0-2) multiplies/divides burst size by 2^n.
 * `se_lro` - (Optional) Enable or disable large receive optimization for vnics.
+* `se_mp_ring_retry_count` - (Optional) The retry count for the multi-producer enqueue before yielding the cpu.
 * `se_mtu` - (Optional) Mtu for the vnics of ses in the se group.
 * `se_name_prefix` - (Optional) Prefix to use for virtual machine name of service engines.
 * `se_pcap_lookahead` - (Optional) Enables lookahead mode of packet receive in pcap mode.
@@ -167,6 +170,7 @@ The following arguments are supported:
 * `se_tunnel_mode` - (Optional) Determines if dsr from secondary se is active or not  0  automatically determine based on hypervisor type.
 * `se_tunnel_udp_port` - (Optional) Udp port for tunneled packets from secondary to primary se in docker bridge mode.requires se reboot.
 * `se_tx_batch_size` - (Optional) Number of packets to batch for transmit to the nic.
+* `se_txq_threshold` - (Optional) Once the tx queue of the dispatcher reaches this threshold, hardware queues are not polled for further packets.
 * `se_udp_encap_ipc` - (Optional) Determines if se-se ipc messages are encapsulated in a udp header  0  automatically determine based on hypervisor type.
 * `se_use_dpdk` - (Optional) Determines if dpdk library should be used or not   0  automatically determine based on hypervisor type 1  use dpdk if pcap is not enabled 2  don't use dpdk.
 * `se_vs_hb_max_pkts_in_batch` - (Optional) Maximum number of aggregated vs heartbeat packets to send in a batch.
