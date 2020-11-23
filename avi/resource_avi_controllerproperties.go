@@ -99,6 +99,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  60,
 		},
+		"controller_resource_info_collection_period": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  30,
+		},
 		"crashed_se_reboot": {
 			Type:     schema.TypeInt,
 			Optional: true,

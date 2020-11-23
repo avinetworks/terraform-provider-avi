@@ -16,6 +16,10 @@ func dataSourceAviSystemConfiguration() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceAdminAuthConfigurationSchema(),
 			},
+			"common_criteria_mode": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"default_license_tier": {
 				Type:     schema.TypeString,
 				Computed: true,

@@ -21,7 +21,7 @@ func ResourceSSLProfileSchema() map[string]*schema.Schema {
 		},
 		"accepted_versions": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     ResourceSSLVersionSchema(),
 		},
 		"cipher_enums": {

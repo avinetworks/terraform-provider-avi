@@ -31,8 +31,7 @@ func ResourceDnsPolicySchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"rule": {
 			Type:     schema.TypeList,

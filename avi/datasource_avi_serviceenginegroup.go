@@ -263,6 +263,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"handle_per_pkt_attack": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"hardwaresecuritymodulegroup_ref": {
 				Type:     schema.TypeString,
 				Computed: true,
@@ -428,6 +432,14 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"netlink_poller_threads": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"netlink_sock_buf_size": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"non_significant_log_throttle": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -466,6 +478,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 			},
 			"per_app": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"per_vs_admission_control": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
@@ -552,7 +568,15 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"se_ip_encap_ipc": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"se_kni_burst_factor": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"se_l3_encap_ipc": {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
@@ -718,6 +742,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 			},
 			"use_hyperthreaded_cores": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"use_objsync": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},

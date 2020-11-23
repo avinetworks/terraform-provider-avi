@@ -321,6 +321,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  "HA_MODE_SHARED",
 		},
+		"handle_per_pkt_attack": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
 		"hardwaresecuritymodulegroup_ref": {
 			Type:     schema.TypeString,
 			Optional: true,
@@ -522,6 +527,16 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Required: true,
 		},
+		"netlink_poller_threads": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  2,
+		},
+		"netlink_sock_buf_size": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  4,
+		},
 		"non_significant_log_throttle": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -568,6 +583,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Default:  10,
 		},
 		"per_app": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
+		},
+		"per_vs_admission_control": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  false,
@@ -675,7 +695,17 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  "SE_CPU_HT_AUTO",
 		},
+		"se_ip_encap_ipc": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  0,
+		},
 		"se_kni_burst_factor": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  0,
+		},
+		"se_l3_encap_ipc": {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  0,
@@ -878,6 +908,11 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Default:  100,
 		},
 		"use_hyperthreaded_cores": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
+		"use_objsync": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,

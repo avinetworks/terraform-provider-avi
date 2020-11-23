@@ -52,8 +52,7 @@ func ResourceGslbSchema() map[string]*schema.Schema {
 		},
 		"leader_cluster_uuid": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"maintenance_mode": {
 			Type:     schema.TypeBool,
@@ -82,7 +81,7 @@ func ResourceGslbSchema() map[string]*schema.Schema {
 		},
 		"sites": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     ResourceGslbSiteSchema(),
 		},
 		"tenant_ref": {

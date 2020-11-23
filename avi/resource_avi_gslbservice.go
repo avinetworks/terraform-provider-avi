@@ -36,7 +36,7 @@ func ResourceGslbServiceSchema() map[string]*schema.Schema {
 		},
 		"domain_names": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 		},
 		"down_response": {
@@ -52,7 +52,7 @@ func ResourceGslbServiceSchema() map[string]*schema.Schema {
 		},
 		"groups": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     ResourceGslbPoolSchema(),
 		},
 		"health_monitor_refs": {

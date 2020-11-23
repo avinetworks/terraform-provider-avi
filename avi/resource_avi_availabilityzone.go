@@ -21,8 +21,7 @@ func ResourceAvailabilityZoneSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"tenant_ref": {
 			Type:     schema.TypeString,
@@ -36,7 +35,7 @@ func ResourceAvailabilityZoneSchema() map[string]*schema.Schema {
 		},
 		"vcenter_refs": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 		},
 	}

@@ -20,6 +20,10 @@ func dataSourceAviAuthProfile() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceAuthProfileHTTPClientParamsSchema(),
 			},
+			"jwt_profile_ref": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
 			"ldap": {
 				Type:     schema.TypeSet,
 				Computed: true,

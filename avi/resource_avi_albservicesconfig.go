@@ -22,14 +22,12 @@ func ResourceALBServicesConfigSchema() map[string]*schema.Schema {
 		},
 		"feature_opt_in_status": {
 			Type:     schema.TypeSet,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Elem:     ResourcePortalFeatureOptInSchema(),
 		},
 		"ip_reputation_config": {
 			Type:     schema.TypeSet,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Elem:     ResourceIpReputationConfigSchema(),
 		},
 		"mode": {
@@ -44,13 +42,11 @@ func ResourceALBServicesConfigSchema() map[string]*schema.Schema {
 		},
 		"portal_url": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"proactive_support_defaults": {
 			Type:     schema.TypeSet,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Elem:     ResourceProactiveSupportDefaultsSchema(),
 		},
 		"split_proxy_configuration": {
