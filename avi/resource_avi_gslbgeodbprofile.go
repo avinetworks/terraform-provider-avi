@@ -21,7 +21,7 @@ func ResourceGslbGeoDbProfileSchema() map[string]*schema.Schema {
 		},
 		"entries": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     ResourceGslbGeoDbEntrySchema(),
 		},
 		"is_federated": {

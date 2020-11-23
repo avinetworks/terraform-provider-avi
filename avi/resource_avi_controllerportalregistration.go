@@ -22,8 +22,7 @@ func ResourceControllerPortalRegistrationSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"portal_auth": {
 			Type:     schema.TypeSet,

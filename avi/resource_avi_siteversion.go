@@ -21,8 +21,7 @@ func ResourceSiteVersionSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"prev_target_version": {
 			Type:     schema.TypeInt,

@@ -20,6 +20,11 @@ func ResourceSystemConfigurationSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourceAdminAuthConfigurationSchema(),
 		},
+		"common_criteria_mode": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
+		},
 		"default_license_tier": {
 			Type:     schema.TypeString,
 			Optional: true,

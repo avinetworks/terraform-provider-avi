@@ -26,8 +26,7 @@ func ResourceNetworkServiceSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"routing_service": {
 			Type:     schema.TypeSet,
@@ -37,13 +36,11 @@ func ResourceNetworkServiceSchema() map[string]*schema.Schema {
 		},
 		"se_group_ref": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"service_type": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"tenant_ref": {
 			Type:     schema.TypeString,
@@ -57,8 +54,7 @@ func ResourceNetworkServiceSchema() map[string]*schema.Schema {
 		},
 		"vrf_ref": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 	}
 }

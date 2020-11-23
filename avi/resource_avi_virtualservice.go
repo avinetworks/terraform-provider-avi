@@ -183,6 +183,12 @@ func ResourceVirtualServiceSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  false,
 		},
+		"jwt_config": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem:     ResourceJWTValidationVsConfigSchema(),
+		},
 		"l4_policies": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -391,10 +397,20 @@ func ResourceVirtualServiceSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem:     &schema.Schema{Type: schema.TypeString},
 		},
+		"vh_matches": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem:     ResourceVHMatchSchema(),
+		},
 		"vh_parent_vs_uuid": {
 			Type:     schema.TypeString,
 			Optional: true,
 			Computed: true,
+		},
+		"vh_type": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Default:  "VS_TYPE_VH_SNI",
 		},
 		"vip": {
 			Type:     schema.TypeList,

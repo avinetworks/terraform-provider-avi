@@ -36,8 +36,7 @@ func ResourceIPReputationDBSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"service_status": {
 			Type:     schema.TypeSet,
@@ -57,8 +56,7 @@ func ResourceIPReputationDBSchema() map[string]*schema.Schema {
 		},
 		"vendor": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"version": {
 			Type:     schema.TypeString,

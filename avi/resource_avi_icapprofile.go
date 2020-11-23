@@ -51,13 +51,11 @@ func ResourceIcapProfileSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"pool_group_ref": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"preview_size": {
 			Type:     schema.TypeInt,
@@ -71,8 +69,7 @@ func ResourceIcapProfileSchema() map[string]*schema.Schema {
 		},
 		"service_uri": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"slow_response_warning_threshold": {
 			Type:     schema.TypeInt,

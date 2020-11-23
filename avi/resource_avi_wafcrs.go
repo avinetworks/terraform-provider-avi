@@ -16,8 +16,7 @@ func ResourceWafCRSSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"description": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"groups": {
 			Type:     schema.TypeList,
@@ -26,18 +25,15 @@ func ResourceWafCRSSchema() map[string]*schema.Schema {
 		},
 		"integrity": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"release_date": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"tenant_ref": {
 			Type:     schema.TypeString,
@@ -51,8 +47,7 @@ func ResourceWafCRSSchema() map[string]*schema.Schema {
 		},
 		"version": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 	}
 }
