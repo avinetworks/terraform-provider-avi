@@ -135,8 +135,7 @@ func ResourceWafPolicySchema() map[string]*schema.Schema {
 		},
 		"waf_profile_ref": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 	}
 }

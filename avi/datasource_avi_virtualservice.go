@@ -152,6 +152,11 @@ func dataSourceAviVirtualService() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"jwt_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceJWTValidationVsConfigSchema(),
+			},
 			"l4_policies": {
 				Type:     schema.TypeList,
 				Computed: true,
@@ -334,7 +339,16 @@ func dataSourceAviVirtualService() *schema.Resource {
 				Computed: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
+			"vh_matches": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem:     ResourceVHMatchSchema(),
+			},
 			"vh_parent_vs_uuid": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"vh_type": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},

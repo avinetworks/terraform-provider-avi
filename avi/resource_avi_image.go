@@ -43,8 +43,7 @@ func ResourceImageSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Type:     schema.TypeString,
-			Optional: true,
-			Computed: true,
+			Required: true,
 		},
 		"se_info": {
 			Type:     schema.TypeSet,

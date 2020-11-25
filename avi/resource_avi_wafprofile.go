@@ -16,8 +16,7 @@ func ResourceWafProfileSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"config": {
 			Type:     schema.TypeSet,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Elem:     ResourceWafConfigSchema(),
 		},
 		"description": {

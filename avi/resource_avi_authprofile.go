@@ -25,6 +25,11 @@ func ResourceAuthProfileSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourceAuthProfileHTTPClientParamsSchema(),
 		},
+		"jwt_profile_ref": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+		},
 		"ldap": {
 			Type:     schema.TypeSet,
 			Optional: true,

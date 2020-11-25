@@ -79,6 +79,10 @@ func dataSourceAviControllerProperties() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"controller_resource_info_collection_period": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"crashed_se_reboot": {
 				Type:     schema.TypeInt,
 				Computed: true,

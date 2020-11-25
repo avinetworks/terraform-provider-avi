@@ -14,13 +14,11 @@ func ResourceACSubjectInfoSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"value": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -31,13 +29,11 @@ func ResourceACUserIdentitySchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"value": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -70,18 +66,15 @@ func ResourceALBServicesAccountUserSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"email": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"phone": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -225,18 +218,15 @@ func ResourceALBServicesCaseAttachmentSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"attachment_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"attachment_size": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"attachment_url": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -279,8 +269,7 @@ func ResourceALBServicesUserSchema() *schema.Resource {
 			},
 			"email": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"managed_accounts": {
 				Type:     schema.TypeList,
@@ -939,6 +928,12 @@ func ResourceAnalyticsPolicySchema() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceFullClientLogsSchema(),
 			},
+			"learning_log_policy": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceLearningLogPolicySchema(),
+			},
 			"metrics_realtime_update": {
 				Type:     schema.TypeSet,
 				Optional: true,
@@ -1505,6 +1500,12 @@ func ResourceApplicationLogSchema() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceIcapLogSchema(),
 			},
+			"jwt_log": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceJwtLogSchema(),
+			},
 			"log_id": {
 				Type:     schema.TypeInt,
 				Required: true,
@@ -1528,6 +1529,12 @@ func ResourceApplicationLogSchema() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
+			},
+			"ntlm_log": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceNtlmLogSchema(),
 			},
 			"ocsp_status_resp_sent": {
 				Type:     schema.TypeBool,
@@ -1914,27 +1921,24 @@ func ResourceAuditComplianceEventInfoSchema() *schema.Resource {
 			},
 			"protocol": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"result": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"subjects": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceACSubjectInfoSchema(),
 			},
 			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"user_identities": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceACUserIdentitySchema(),
 			},
 		},
@@ -1946,13 +1950,11 @@ func ResourceAuthAttributeMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"attribute_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"attribute_value_list": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceStringMatchSchema(),
 			},
 		},
@@ -2047,8 +2049,7 @@ func ResourceAuthMatchAttributeSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"name": {
 				Type:     schema.TypeString,
@@ -2069,8 +2070,7 @@ func ResourceAuthMatchGroupMembershipSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"groups": {
 				Type:     schema.TypeList,
@@ -2172,8 +2172,7 @@ func ResourceAuthenticationPolicySchema() *schema.Resource {
 			},
 			"default_auth_profile_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -2195,8 +2194,7 @@ func ResourceAuthenticationRuleSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match": {
 				Type:     schema.TypeSet,
@@ -2205,6 +2203,22 @@ func ResourceAuthenticationRuleSchema() *schema.Resource {
 				Elem:     ResourceAuthenticationMatchSchema(),
 			},
 			"name": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+		},
+	}
+}
+
+func ResourceAuthnRuleMatchSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"rule_action": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"rule_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -2233,6 +2247,12 @@ func ResourceAuthorizationActionSchema() *schema.Resource {
 func ResourceAuthorizationMatchSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
+			"access_token": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceJWTMatchSchema(),
+			},
 			"attr_matches": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -2277,8 +2297,7 @@ func ResourceAuthorizationRuleSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceAuthorizationActionSchema(),
 			},
 			"enable": {
@@ -2288,16 +2307,30 @@ func ResourceAuthorizationRuleSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceAuthorizationMatchSchema(),
 			},
 			"name": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+		},
+	}
+}
+
+func ResourceAuthzRuleMatchSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"rule_action": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"rule_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -2580,7 +2613,7 @@ func ResourceAzureConfigurationSchema() *schema.Resource {
 			},
 			"network_info": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceAzureNetworkInfoSchema(),
 			},
 			"resource_group": {
@@ -3065,8 +3098,7 @@ func ResourceBgpRoutingOptionsSchema() *schema.Resource {
 			},
 			"label": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"learn_only_default_route": {
 				Type:     schema.TypeBool,
@@ -3889,8 +3921,7 @@ func ResourceClientLogStreamingConfigSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"external_server": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"external_server_port": {
 				Type:     schema.TypeInt,
@@ -3933,8 +3964,7 @@ func ResourceClientLogStreamingFormatSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"format": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"included_fields": {
 				Type:     schema.TypeList,
@@ -4353,6 +4383,33 @@ func ResourceCloudMetaSchema() *schema.Resource {
 			"value": {
 				Type:     schema.TypeString,
 				Required: true,
+			},
+		},
+	}
+}
+
+func ResourceCloudRouteNotifDetailsSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"cc_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"reason": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"route_table": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"routes": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
 	}
@@ -5299,6 +5356,11 @@ func ResourceConfigUserLoginSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
 			"client_ip": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"client_type": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -6624,8 +6686,7 @@ func ResourceDNSConfigSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"domain_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -7412,8 +7473,7 @@ func ResourceDnsAttackSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"attack_vector": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"enabled": {
 				Type:     schema.TypeBool,
@@ -7462,8 +7522,7 @@ func ResourceDnsClientIpMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"client_ip": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrMatchSchema(),
 			},
 			"use_edns_client_subnet_ip": {
@@ -7537,8 +7596,7 @@ func ResourceDnsGeoLocationMatchSchema() *schema.Resource {
 			},
 			"match_criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"use_edns_client_subnet_ip": {
 				Type:     schema.TypeBool,
@@ -7592,13 +7650,11 @@ func ResourceDnsMxRdataSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"host": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"priority": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -7659,13 +7715,11 @@ func ResourceDnsPoliciesSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"dns_policy_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -7676,8 +7730,7 @@ func ResourceDnsQueryNameMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"query_domain_names": {
 				Type:     schema.TypeList,
@@ -7698,8 +7751,7 @@ func ResourceDnsQueryTypeMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"query_type": {
 				Type:     schema.TypeList,
@@ -7715,14 +7767,12 @@ func ResourceDnsRateLimiterSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceDnsRuleRLActionSchema(),
 			},
 			"rate_limiter_object": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceRateLimiterSchema(),
 			},
 		},
@@ -7761,7 +7811,7 @@ func ResourceDnsRecordSchema() *schema.Resource {
 			},
 			"fqdn": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"ip6_address": {
@@ -8066,8 +8116,7 @@ func ResourceDnsRrSetSchema() *schema.Resource {
 			},
 			"fqdn": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"ip6_addresses": {
 				Type:     schema.TypeList,
@@ -8086,13 +8135,11 @@ func ResourceDnsRrSetSchema() *schema.Resource {
 			},
 			"ttl": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -8114,8 +8161,7 @@ func ResourceDnsRuleSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"log": {
 				Type:     schema.TypeBool,
@@ -8130,8 +8176,7 @@ func ResourceDnsRuleSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -8206,8 +8251,7 @@ func ResourceDnsRuleActionGslbSiteSelectionSchema() *schema.Resource {
 			},
 			"site_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -8262,8 +8306,7 @@ func ResourceDnsRuleDnsRrSetSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"resource_record_set": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceDnsRrSetSchema(),
 			},
 			"section": {
@@ -8453,13 +8496,11 @@ func ResourceDnsTransportProtocolMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"protocol": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -8470,8 +8511,7 @@ func ResourceDnsTxtRdataSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"text_str": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -8487,8 +8527,7 @@ func ResourceDnsZoneSchema() *schema.Resource {
 			},
 			"domain_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"name_server": {
 				Type:     schema.TypeString,
@@ -9147,6 +9186,12 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceCloudAutoscalingConfigFailureDetailsSchema(),
 			},
+			"cloud_route_notif_details": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceCloudRouteNotifDetailsSchema(),
+			},
 			"cluster_config_failed_details": {
 				Type:     schema.TypeSet,
 				Optional: true,
@@ -9440,6 +9485,12 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceLicenseTransactionDetailsSchema(),
+			},
+			"log_agent_event_details": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceLogAgentEventDetailSchema(),
 			},
 			"marathon_service_port_conflict_details": {
 				Type:     schema.TypeSet,
@@ -10504,29 +10555,25 @@ func ResourceGCPConfigurationSchema() *schema.Resource {
 			},
 			"network_config": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceGCPNetworkConfigSchema(),
 			},
 			"region_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"se_project_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"vip_allocation_strategy": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceGCPVIPAllocationSchema(),
 			},
 			"zones": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
@@ -10579,8 +10626,7 @@ func ResourceGCPInBandManagementSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"vpc_network_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"vpc_project_id": {
 				Type:     schema.TypeString,
@@ -10589,8 +10635,7 @@ func ResourceGCPInBandManagementSchema() *schema.Resource {
 			},
 			"vpc_subnet_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -10601,8 +10646,7 @@ func ResourceGCPNetworkConfigSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"config": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"inband": {
 				Type:     schema.TypeSet,
@@ -10631,8 +10675,7 @@ func ResourceGCPOneArmModeSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"data_vpc_network_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"data_vpc_project_id": {
 				Type:     schema.TypeString,
@@ -10641,18 +10684,15 @@ func ResourceGCPOneArmModeSchema() *schema.Resource {
 			},
 			"data_vpc_subnet_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"management_vpc_network_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"management_vpc_subnet_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -10754,18 +10794,15 @@ func ResourceGCPTwoArmModeSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"backend_data_vpc_network_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"backend_data_vpc_subnet_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"frontend_data_vpc_network_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"frontend_data_vpc_project_id": {
 				Type:     schema.TypeString,
@@ -10774,18 +10811,15 @@ func ResourceGCPTwoArmModeSchema() *schema.Resource {
 			},
 			"frontend_data_vpc_subnet_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"management_vpc_network_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"management_vpc_subnet_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -11093,8 +11127,7 @@ func ResourceGslbGeoDbEntrySchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"file": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceGslbGeoDbFileSchema(),
 			},
 			"priority": {
@@ -11134,8 +11167,7 @@ func ResourceGslbGeoLocationSchema() *schema.Resource {
 			},
 			"source": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -11306,7 +11338,7 @@ func ResourceGslbPoolSchema() *schema.Resource {
 			},
 			"members": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceGslbPoolMemberSchema(),
 			},
 			"min_health_monitors_up": {
@@ -11316,8 +11348,7 @@ func ResourceGslbPoolSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"priority": {
 				Type:     schema.TypeInt,
@@ -11807,8 +11838,7 @@ func ResourceGslbSiteSchema() *schema.Resource {
 			},
 			"cluster_uuid": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"dns_vses": {
 				Type:     schema.TypeList,
@@ -11848,13 +11878,11 @@ func ResourceGslbSiteSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"password": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
@@ -11875,8 +11903,7 @@ func ResourceGslbSiteSchema() *schema.Resource {
 			},
 			"username": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"uuid": {
 				Type:     schema.TypeString,
@@ -11915,8 +11942,7 @@ func ResourceGslbSiteDnsVsSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"dns_vs_uuid": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"domain_names": {
 				Type:     schema.TypeList,
@@ -12515,8 +12541,7 @@ func ResourceGslbThirdPartySiteSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"ratio": {
 				Type:     schema.TypeInt,
@@ -12653,8 +12678,7 @@ func ResourceHSMSafenetLunaServerSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"partition_passwd": {
 				Type:             schema.TypeString,
@@ -12856,6 +12880,11 @@ func ResourceHTTPApplicationProfileSchema() *schema.Resource {
 				Elem:     ResourceCompressionProfileSchema(),
 			},
 			"connection_multiplexing_enabled": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  true,
+			},
+			"detect_ntlm_app": {
 				Type:     schema.TypeBool,
 				Optional: true,
 				Default:  true,
@@ -13478,8 +13507,7 @@ func ResourceHTTPSecurityActionRateProfileSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceRateLimiterActionSchema(),
 			},
 			"per_client_ip": {
@@ -13494,8 +13522,7 @@ func ResourceHTTPSecurityActionRateProfileSchema() *schema.Resource {
 			},
 			"rate_limiter": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceRateLimiterSchema(),
 			},
 		},
@@ -13665,7 +13692,7 @@ func ResourceHTTPVersionMatchSchema() *schema.Resource {
 			},
 			"versions": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
@@ -13748,15 +13775,13 @@ func ResourceHealthMonitorAuthInfoSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"password": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
 			"username": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
@@ -13851,7 +13876,7 @@ func ResourceHealthMonitorHttpSchema() *schema.Resource {
 			},
 			"http_response_code": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"maintenance_code": {
@@ -13884,22 +13909,19 @@ func ResourceHealthMonitorRadiusSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"password": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
 			"shared_secret": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
 			"username": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -13947,8 +13969,7 @@ func ResourceHealthMonitorSSLAttributesSchema() *schema.Resource {
 			},
 			"ssl_profile_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -14378,12 +14399,11 @@ func ResourceIPReputationTypeMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_operation": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"reputation_types": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
@@ -14755,7 +14775,7 @@ func ResourceIpCommunitySchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"community": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"ip_begin": {
@@ -15063,11 +15083,6 @@ func ResourceIpamDnsInternalProfileSchema() *schema.Resource {
 				Optional: true,
 				Default:  30,
 			},
-			"usable_network_refs": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-			},
 			"usable_networks": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -15158,8 +15173,7 @@ func ResourceIpamDnsTencentProfileSchema() *schema.Resource {
 			},
 			"region": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"usable_subnet_ids": {
 				Type:     schema.TypeList,
@@ -15168,8 +15182,7 @@ func ResourceIpamDnsTencentProfileSchema() *schema.Resource {
 			},
 			"vpc_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"zones": {
 				Type:     schema.TypeList,
@@ -15190,8 +15203,7 @@ func ResourceIpamUsableNetworkSchema() *schema.Resource {
 			},
 			"nw_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -15278,6 +15290,83 @@ func ResourceIptableRuleSetSchema() *schema.Resource {
 	}
 }
 
+func ResourceJWTClaimMatchSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"bool_match": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
+			"int_match": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"is_mandatory": {
+				Type:     schema.TypeBool,
+				Required: true,
+			},
+			"name": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"string_match": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceStringMatchSchema(),
+			},
+			"type": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"validate": {
+				Type:     schema.TypeBool,
+				Required: true,
+			},
+		},
+	}
+}
+
+func ResourceJWTMatchSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"matches": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceJWTClaimMatchSchema(),
+			},
+			"token_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceJWTValidationVsConfigSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"audience": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"jwt_location": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "JWT_LOCATION_AUTHORIZATION_HEADER",
+			},
+			"jwt_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceJobEntrySchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -15312,6 +15401,35 @@ func ResourceJobEntrySchema() *schema.Resource {
 	}
 }
 
+func ResourceJwtLogSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"authn_rule_match": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceAuthnRuleMatchSchema(),
+			},
+			"authz_rule_match": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceAuthzRuleMatchSchema(),
+			},
+			"is_jwt_verified": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
+			"token_payload": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceKeyValueSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -15333,8 +15451,7 @@ func ResourceKeyValueTupleSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"key": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"value": {
 				Type:     schema.TypeString,
@@ -15362,13 +15479,11 @@ func ResourceL4PoliciesSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"l4_policy_set_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -15390,8 +15505,7 @@ func ResourceL4RuleSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match": {
 				Type:     schema.TypeSet,
@@ -15401,8 +15515,7 @@ func ResourceL4RuleSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -15426,8 +15539,7 @@ func ResourceL4RuleActionSelectPoolSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"action_type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"pool_group_ref": {
 				Type:     schema.TypeString,
@@ -15473,8 +15585,7 @@ func ResourceL4RulePortMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"port_ranges": {
 				Type:     schema.TypeList,
@@ -15495,13 +15606,11 @@ func ResourceL4RuleProtocolMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_criteria": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"protocol": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -15542,7 +15651,7 @@ func ResourceLdapAuthSettingsSchema() *schema.Resource {
 			},
 			"server": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"settings": {
@@ -15650,6 +15759,28 @@ func ResourceLdapUserBindSettingsSchema() *schema.Resource {
 			},
 			"user_id_attribute": {
 				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceLearningLogPolicySchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"enabled": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  false,
+			},
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"port": {
+				Type:     schema.TypeInt,
 				Optional: true,
 				Computed: true,
 			},
@@ -15771,13 +15902,11 @@ func ResourceLicenseInfoSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"last_updated": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"service_cores": {
 				Type:     schema.TypeFloat,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"tenant_uuid": {
 				Type:     schema.TypeString,
@@ -15786,8 +15915,7 @@ func ResourceLicenseInfoSchema() *schema.Resource {
 			},
 			"tier": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"uuid": {
 				Type:     schema.TypeString,
@@ -16007,6 +16135,54 @@ func ResourceLocationHdrMatchSchema() *schema.Resource {
 	}
 }
 
+func ResourceLogAgentEventDetailSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"protocol": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"tcp_detail": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceLogAgentTCPClientEventDetailSchema(),
+			},
+			"type": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+		},
+	}
+}
+
+func ResourceLogAgentTCPClientEventDetailSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"error_code": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"error_reason": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"port": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceLogControllerMappingSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -16171,8 +16347,7 @@ func ResourceMatchReplacePairSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"match_string": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"replacement_string": {
 				Type:     schema.TypeSet,
@@ -16693,7 +16868,7 @@ func ResourceMethodMatchSchema() *schema.Resource {
 			},
 			"methods": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
@@ -17285,8 +17460,7 @@ func ResourceMetricsEventThresholdSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"metrics_event_threshold_type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"reset_threshold": {
 				Type:     schema.TypeFloat,
@@ -17565,8 +17739,7 @@ func ResourceMicroServiceMatchSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"group_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match_criteria": {
 				Type:     schema.TypeString,
@@ -17586,13 +17759,11 @@ func ResourceNTPAuthenticationKeySchema() *schema.Resource {
 			},
 			"key": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"key_number": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -17630,8 +17801,7 @@ func ResourceNTPServerSchema() *schema.Resource {
 			},
 			"server": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrSchema(),
 			},
 		},
@@ -17692,8 +17862,7 @@ func ResourceNatPolicyActionSchema() *schema.Resource {
 			},
 			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -17704,8 +17873,7 @@ func ResourceNatRuleSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceNatPolicyActionSchema(),
 			},
 			"created_by": {
@@ -17715,24 +17883,20 @@ func ResourceNatRuleSchema() *schema.Resource {
 			},
 			"enable": {
 				Type:     schema.TypeBool,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceNatMatchTargetSchema(),
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -17801,11 +17965,6 @@ func ResourceNetworkRuntimeSchema() *schema.Resource {
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-			"se_uuid": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-			},
 			"subnet_runtime": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -17833,6 +17992,12 @@ func ResourceNetworkSecurityMatchTargetSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceIpAddrMatchSchema(),
+			},
+			"client_port": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourcePortMatchGenericSchema(),
 			},
 			"ip_reputation_type": {
 				Type:     schema.TypeSet,
@@ -17965,6 +18130,11 @@ func ResourceNetworkSubnetInfoSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"type": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
 			"used": {
 				Type:     schema.TypeInt,
 				Optional: true,
@@ -17979,25 +18149,21 @@ func ResourceNsxConfigurationSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"avi_nsx_prefix": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"nsx_manager_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"nsx_manager_password": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
 			"nsx_manager_username": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"nsx_poll_time": {
 				Type:     schema.TypeInt,
@@ -18028,19 +18194,16 @@ func ResourceNsxtConfigurationSchema() *schema.Resource {
 			},
 			"management_segment": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceTier1LogicalRouterInfoSchema(),
 			},
 			"nsxt_credentials_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"nsxt_url": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"site_id": {
 				Type:     schema.TypeString,
@@ -18049,14 +18212,12 @@ func ResourceNsxtConfigurationSchema() *schema.Resource {
 			},
 			"tier1_segment_config": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceNsxtTier1SegmentConfigSchema(),
 			},
 			"transport_zone": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -18174,8 +18335,7 @@ func ResourceNsxtTier1SegmentAutomaticModeSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"nsxt_segment_subnet": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrPrefixSchema(),
 			},
 			"num_se_per_segment": {
@@ -18185,7 +18345,7 @@ func ResourceNsxtTier1SegmentAutomaticModeSchema() *schema.Resource {
 			},
 			"tier1_lr_ids": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
@@ -18221,8 +18381,25 @@ func ResourceNsxtTier1SegmentManualModeSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"tier1_lrs": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceTier1LogicalRouterInfoSchema(),
+			},
+		},
+	}
+}
+
+func ResourceNtlmLogSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"ntlm_detected": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
+			"ntlm_status": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
 			},
 		},
 	}
@@ -19200,8 +19377,7 @@ func ResourceOshiftSharedVirtualServiceSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"virtualservice_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -19468,8 +19644,7 @@ func ResourcePatchControllerParamsSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"controller_patch_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"skip_warnings": {
 				Type:     schema.TypeBool,
@@ -19535,7 +19710,7 @@ func ResourcePatchSeGroupParamsSchema() *schema.Resource {
 			},
 			"se_group_refs": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"se_patch_ref": {
@@ -19557,8 +19732,7 @@ func ResourcePatchSystemParamsSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"controller_patch_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"se_group_options": {
 				Type:     schema.TypeSet,
@@ -19568,8 +19742,7 @@ func ResourcePatchSystemParamsSchema() *schema.Resource {
 			},
 			"se_patch_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"skip_warnings": {
 				Type:     schema.TypeBool,
@@ -19649,8 +19822,7 @@ func ResourcePlacementNetworkSchema() *schema.Resource {
 			},
 			"subnet": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrPrefixSchema(),
 			},
 		},
@@ -19679,8 +19851,7 @@ func ResourcePlacementScopeConfigSchema() *schema.Resource {
 			},
 			"vcenter_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -19913,8 +20084,29 @@ func ResourcePortMatchSchema() *schema.Resource {
 			},
 			"ports": {
 				Type:     schema.TypeList,
+				Required: true,
+				Elem:     &schema.Schema{Type: schema.TypeInt},
+			},
+		},
+	}
+}
+
+func ResourcePortMatchGenericSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"match_criteria": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"ports": {
+				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeInt},
+			},
+			"ranges": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourcePortRangeSchema(),
 			},
 		},
 	}
@@ -20491,8 +20683,7 @@ func ResourceRateProfileSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceRateLimiterActionSchema(),
 			},
 			"explicit_tracking": {
@@ -20721,7 +20912,7 @@ func ResourceResumeSeGroupParamsSchema() *schema.Resource {
 			},
 			"se_group_refs": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"skip_warnings": {
@@ -21180,8 +21371,7 @@ func ResourceRoleFilterSchema() *schema.Resource {
 			},
 			"match_label": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceRoleFilterMatchLabelSchema(),
 			},
 			"match_operation": {
@@ -21203,8 +21393,7 @@ func ResourceRoleFilterMatchLabelSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"key": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"values": {
 				Type:     schema.TypeList,
@@ -21250,7 +21439,7 @@ func ResourceRollbackPatchSeGroupParamsSchema() *schema.Resource {
 			},
 			"se_group_refs": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"skip_warnings": {
@@ -21291,7 +21480,7 @@ func ResourceRollbackSeGroupParamsSchema() *schema.Resource {
 			},
 			"se_group_refs": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"skip_warnings": {
@@ -21342,8 +21531,7 @@ func ResourceRouteInfoSchema() *schema.Resource {
 			},
 			"subnet": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrPrefixSchema(),
 			},
 		},
@@ -21428,8 +21616,7 @@ func ResourceSAMLSPConfigSchema() *schema.Resource {
 			},
 			"entity_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"key": {
 				Type:     schema.TypeList,
@@ -21443,8 +21630,7 @@ func ResourceSAMLSPConfigSchema() *schema.Resource {
 			},
 			"single_signon_url": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"use_idp_session_timeout": {
 				Type:     schema.TypeBool,
@@ -21879,14 +22065,12 @@ func ResourceSSLProfileSelectorSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"client_ip_list": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrMatchSchema(),
 			},
 			"ssl_profile_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -22162,8 +22346,7 @@ func ResourceSamlSettingsSchema() *schema.Resource {
 			},
 			"sp": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceSamlServiceProviderSettingsSchema(),
 			},
 		},
@@ -22733,8 +22916,7 @@ func ResourceSeFaultSchema() *schema.Resource {
 			},
 			"fault_name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"function_name": {
 				Type:     schema.TypeString,
@@ -25225,13 +25407,11 @@ func ResourceSecMgrThresholdSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"attack_type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"threshold": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -25480,13 +25660,12 @@ func ResourceSelectorSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"labels": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceKeyValueTupleSchema(),
 			},
 			"type": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -26466,8 +26645,7 @@ func ResourceStaticIpAllocInfoSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"ip": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrSchema(),
 			},
 			"obj_info": {
@@ -26489,8 +26667,7 @@ func ResourceStaticIpRangeSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"range": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceIpAddrRangeSchema(),
 			},
 			"type": {
@@ -26656,16 +26833,6 @@ func ResourceSubnetSchema() *schema.Resource {
 				Optional: true,
 				Elem:     ResourceStaticIpRangeSchema(),
 			},
-			"static_ips": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourceIpAddrSchema(),
-			},
-			"static_ranges": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourceIpAddrRangeSchema(),
-			},
 		},
 	}
 }
@@ -26673,16 +26840,6 @@ func ResourceSubnetSchema() *schema.Resource {
 func ResourceSubnetRuntimeSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
-			"free_ip_count": {
-				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
-			},
-			"ip_alloced": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     ResourceIpAllocInfoSchema(),
-			},
 			"ip_range_runtimes": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -26692,16 +26849,6 @@ func ResourceSubnetRuntimeSchema() *schema.Resource {
 				Type:     schema.TypeSet,
 				Required: true,
 				Elem:     ResourceIpAddrPrefixSchema(),
-			},
-			"total_ip_count": {
-				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
-			},
-			"used_ip_count": {
-				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
 			},
 		},
 	}
@@ -27179,7 +27326,7 @@ func ResourceTacacsPlusAuthSettingsSchema() *schema.Resource {
 			},
 			"server": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"service": {
@@ -27240,8 +27387,7 @@ func ResourceTenantLabelSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"key": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"value": {
 				Type:     schema.TypeString,
@@ -27257,15 +27403,13 @@ func ResourceTencentCredentialsSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"secret_id": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
 			"secret_key": {
 				Type:             schema.TypeString,
-				Optional:         true,
-				Computed:         true,
+				Required:         true,
 				Sensitive:        true,
 				DiffSuppressFunc: suppressSensitiveFieldDiffs,
 			},
@@ -27305,13 +27449,11 @@ func ResourceTencentZoneNetworkSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"availability_zone": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"usable_subnet_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -27322,13 +27464,11 @@ func ResourceTier1LogicalRouterInfoSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"segment_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"tier1_lr_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -27416,7 +27556,7 @@ func ResourceURIParamSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"tokens": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     ResourceURIParamTokenSchema(),
 			},
 			"type": {
@@ -27486,8 +27626,7 @@ func ResourceUpgradeControllerParamsSchema() *schema.Resource {
 			},
 			"image_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"skip_warnings": {
 				Type:     schema.TypeBool,
@@ -27695,8 +27834,7 @@ func ResourceUpgradeSeGroupParamsSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"image_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"se_group_options": {
 				Type:     schema.TypeSet,
@@ -27706,7 +27844,7 @@ func ResourceUpgradeSeGroupParamsSchema() *schema.Resource {
 			},
 			"se_group_refs": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"se_patch_ref": {
@@ -27733,8 +27871,7 @@ func ResourceUpgradeSystemParamsSchema() *schema.Resource {
 			},
 			"image_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"se_group_options": {
 				Type:     schema.TypeSet,
@@ -27902,6 +28039,22 @@ func ResourceVCenterCredentialsSchema() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceVHMatchSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"host": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"path": {
+				Type:     schema.TypeList,
+				Required: true,
+				Elem:     ResourcePathMatchSchema(),
 			},
 		},
 	}
@@ -29501,8 +29654,7 @@ func ResourceVipSchema() *schema.Resource {
 			},
 			"vip_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -32107,8 +32259,7 @@ func ResourceWafApplicationSignaturesSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"provider_ref": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"rules": {
 				Type:     schema.TypeList,
@@ -32246,13 +32397,11 @@ func ResourceWafDataFileSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"data": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"type": {
 				Type:     schema.TypeString,
@@ -32428,8 +32577,7 @@ func ResourceWafPSMLocationSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match": {
 				Type:     schema.TypeSet,
@@ -32439,8 +32587,7 @@ func ResourceWafPSMLocationSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"rules": {
 				Type:     schema.TypeList,
@@ -32528,13 +32675,11 @@ func ResourceWafPSMMatchElementSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"sub_element": {
 				Type:     schema.TypeString,
@@ -32560,8 +32705,7 @@ func ResourceWafPSMRuleSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match_case": {
 				Type:     schema.TypeString,
@@ -32600,8 +32744,7 @@ func ResourceWafPSMRuleSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"paranoia_level": {
 				Type:     schema.TypeString,
@@ -32610,8 +32753,7 @@ func ResourceWafPSMRuleSchema() *schema.Resource {
 			},
 			"rule_id": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 		},
 	}
@@ -32634,7 +32776,7 @@ func ResourceWafPolicyAllowlistRuleSchema() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"actions": {
 				Type:     schema.TypeList,
-				Optional: true,
+				Required: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"description": {
@@ -32649,19 +32791,16 @@ func ResourceWafPolicyAllowlistRuleSchema() *schema.Resource {
 			},
 			"index": {
 				Type:     schema.TypeInt,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"match": {
 				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
+				Required: true,
 				Elem:     ResourceMatchTargetSchema(),
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"sampling_percent": {
 				Type:     schema.TypeInt,
@@ -32730,8 +32869,7 @@ func ResourceWafRuleSchema() *schema.Resource {
 			},
 			"rule": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"rule_id": {
 				Type:     schema.TypeString,
@@ -32766,8 +32904,7 @@ func ResourceWafRuleGroupSchema() *schema.Resource {
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Required: true,
 			},
 			"rules": {
 				Type:     schema.TypeList,

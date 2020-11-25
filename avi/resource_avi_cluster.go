@@ -20,7 +20,7 @@ func ResourceClusterSchema() map[string]*schema.Schema {
 		},
 		"nodes": {
 			Type:     schema.TypeList,
-			Optional: true,
+			Required: true,
 			Elem:     ResourceClusterNodeSchema(),
 		},
 		"rejoin_nodes_automatically": {
