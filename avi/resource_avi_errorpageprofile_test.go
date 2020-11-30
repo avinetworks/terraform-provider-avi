@@ -95,6 +95,14 @@ data "avi_tenant" "default_tenant"{
 }
 resource "avi_errorpageprofile" "testErrorPageProfile" {
 	name = "test-epp-abc"
+	error_pages {
+	index = "1"
+	enable = false
+	match {
+		match_criteria = "IS_IN"
+		status_codes = ["400","404"]
+	}
+}
 	tenant_ref = data.avi_tenant.default_tenant.id
 }
 `
@@ -105,6 +113,14 @@ data "avi_tenant" "default_tenant"{
 }
 resource "avi_errorpageprofile" "testErrorPageProfile" {
 	name = "test-epp-updated"
+	error_pages {
+	index = "1"
+	enable = false
+	match {
+		match_criteria = "IS_IN"
+		status_codes = ["400","401","404"]
+	}
+}
 	tenant_ref = data.avi_tenant.default_tenant.id
 }
 `
