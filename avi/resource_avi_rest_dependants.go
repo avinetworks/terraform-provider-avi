@@ -1541,6 +1541,12 @@ func ResourceApplicationLogSchema() *schema.Resource {
 				Optional: true,
 				Default:  false,
 			},
+			"oob_log": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceOutOfBandRequestLogSchema(),
+			},
 			"paa_log": {
 				Type:     schema.TypeSet,
 				Optional: true,
@@ -6768,6 +6774,103 @@ func ResourceDNSVsSyncInfoSchema() *schema.Resource {
 			},
 			"total_records": {
 				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceDSRequestLogSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"ds_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"event": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"headers_received_from_server": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"headers_sent_to_server": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"http_response_code": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"http_version": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"method": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"pool_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"pool_uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"request_length": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"response_length": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"server_ip": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"server_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"server_port": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"servers_tried": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  0,
+			},
+			"source_port": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"uri_path": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"uri_query": {
+				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
@@ -19378,6 +19481,18 @@ func ResourceOshiftSharedVirtualServiceSchema() *schema.Resource {
 			"virtualservice_name": {
 				Type:     schema.TypeString,
 				Required: true,
+			},
+		},
+	}
+}
+
+func ResourceOutOfBandRequestLogSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"ds_req_logs": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceDSRequestLogSchema(),
 			},
 		},
 	}
