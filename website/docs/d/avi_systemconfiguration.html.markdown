@@ -41,7 +41,7 @@ In addition to all arguments above, the following attributes are exported:
 * `dns_virtualservice_refs` - Dns virtualservices hosting fqdn records for applications across avi vantage. If no virtualservices are provided, avi vantage will provide dns services for configured applications. Switching back to avi vantage from dns virtualservices is not allowed. It is a reference to an object of type virtualservice.
 * `docker_mode` - Boolean flag to set docker_mode.
 * `email_configuration` - Dict settings for systemconfiguration.
-* `enable_cors` - Enable cors header. Field introduced in 20.1.3.
+* `enable_cors` - Enable cors header. Field introduced in 20.1.3. Allowed in basic edition, essentials edition, enterprise edition.
 * `fips_mode` - Enable fips mode. Field introduced in 20.1.1.
 * `global_tenant_config` - Dict settings for systemconfiguration.
 * `linux_configuration` - Dict settings for systemconfiguration.

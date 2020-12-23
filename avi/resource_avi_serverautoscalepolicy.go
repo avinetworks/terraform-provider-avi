@@ -14,6 +14,11 @@ import (
 
 func ResourceServerAutoScalePolicySchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		"delay_for_server_garbage_collection": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  0,
+		},
 		"description": {
 			Type:     schema.TypeString,
 			Optional: true,

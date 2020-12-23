@@ -6864,6 +6864,11 @@ func ResourceDSRequestLogSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"total_time": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
 			"uri_path": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -7328,6 +7333,12 @@ func ResourceDebugVirtualServiceSchema() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 			},
+			"objsync": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceDebugVirtualServiceObjSyncSchema(),
+			},
 			"resync_flows": {
 				Type:     schema.TypeBool,
 				Optional: true,
@@ -7391,6 +7402,18 @@ func ResourceDebugVirtualServiceCaptureSchema() *schema.Resource {
 				Type:     schema.TypeInt,
 				Optional: true,
 				Default:  128,
+			},
+		},
+	}
+}
+
+func ResourceDebugVirtualServiceObjSyncSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"trigger_initial_sync": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  false,
 			},
 		},
 	}
@@ -9582,6 +9605,12 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceLicenseExpiryDetailsSchema(),
+			},
+			"license_tier_switch_details": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceLicenseTierSwitchDetiailsSchema(),
 			},
 			"license_transaction_details": {
 				Type:     schema.TypeSet,
@@ -14308,12 +14337,12 @@ func ResourceHttpCacheConfigSchema() *schema.Resource {
 				Optional: true,
 				Default:  4194304,
 			},
-			"mime_types_black_group_refs": {
+			"mime_types_block_group_refs": {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-			"mime_types_black_list": {
+			"mime_types_block_lists": {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
@@ -14600,6 +14629,16 @@ func ResourceIcapRequestLogSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"icap_server_ip": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"icap_server_port": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
 			"latency": {
 				Type:     schema.TypeInt,
 				Optional: true,
@@ -14625,23 +14664,39 @@ func ResourceIcapRequestLogSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
-			"server_ip": {
-				Type:     schema.TypeSet,
-				Optional: true,
-				Computed: true,
-				Elem:     ResourceIpAddrSchema(),
-			},
 			"source_port": {
 				Type:     schema.TypeInt,
 				Optional: true,
 				Computed: true,
 			},
-			"threat_description": {
+			"threat_id": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 			},
-			"threat_id": {
+			"violations": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceIcapViolationSchema(),
+			},
+		},
+	}
+}
+
+func ResourceIcapViolationSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"file_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"resolution": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"threat_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -16021,6 +16076,33 @@ func ResourceLicenseInfoSchema() *schema.Resource {
 				Required: true,
 			},
 			"uuid": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
+func ResourceLicenseTierSwitchDetiailsSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"destination_tier": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"reason": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"source_tier": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"status": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -18958,6 +19040,28 @@ func ResourceOShiftK8SConfigurationSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceIpAddrSchema(),
+			},
+		},
+	}
+}
+
+func ResourceObjSyncConfigSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"objsync_cpu_limit": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  30,
+			},
+			"objsync_hub_elect_interval": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  60,
+			},
+			"objsync_reconcile_interval": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  10,
 			},
 		},
 	}
@@ -26407,6 +26511,11 @@ func ResourceSingleLicenseSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"ccu": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  0,
+			},
 			"cores": {
 				Type:     schema.TypeFloat,
 				Optional: true,
@@ -26922,7 +27031,7 @@ func ResourceSubJobSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
-			"num_tries": {
+			"num_retries": {
 				Type:     schema.TypeInt,
 				Optional: true,
 				Computed: true,
@@ -31161,6 +31270,11 @@ func ResourceVserverL4MetricsObjSchema() *schema.Resource {
 				Computed: true,
 			},
 			"avg_errored_connections": {
+				Type:     schema.TypeFloat,
+				Optional: true,
+				Computed: true,
+			},
+			"avg_half_open_conns": {
 				Type:     schema.TypeFloat,
 				Optional: true,
 				Computed: true,
