@@ -432,14 +432,6 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
-			"netlink_poller_threads": {
-				Type:     schema.TypeInt,
-				Computed: true,
-			},
-			"netlink_sock_buf_size": {
-				Type:     schema.TypeInt,
-				Computed: true,
-			},
 			"non_significant_log_throttle": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -449,6 +441,15 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 			},
 			"num_flow_cores_sum_changes_to_ignore": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"objsync_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceObjSyncConfigSchema(),
+			},
+			"objsync_port": {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
