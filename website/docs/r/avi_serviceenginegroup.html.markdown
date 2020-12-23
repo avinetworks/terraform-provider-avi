@@ -131,11 +131,11 @@ The following arguments are supported:
 * `min_se` - (Optional) Minimum number of services engines in this group (relevant for se autorebalance only). Allowed values are 0-1000. Field introduced in 17.2.13,18.1.3,18.2.1.
 * `minimum_connection_memory` - (Optional) Indicates the percent of memory reserved for connections. Allowed values are 0-100. Field introduced in 18.1.2. Unit is percent.
 * `n_log_streaming_threads` - (Optional) Number of threads to use for log streaming. Allowed values are 1-100. Field introduced in 17.2.12, 18.1.2.
-* `netlink_poller_threads` - (Optional) Number of threads to poll for netlink messages excluding the thread for default namespace. Requires se reboot. Allowed values are 1-32. Field introduced in 20.1.3.
-* `netlink_sock_buf_size` - (Optional) Socket buffer size for the netlink sockets. Requires se reboot. Allowed values are 1-128. Field introduced in 20.1.3. Unit is mega_bytes.
 * `non_significant_log_throttle` - (Optional) This setting limits the number of non-significant logs generated per second per core on this se. Default is 100 logs per second. Set it to zero (0) to deactivate throttling. Field introduced in 17.1.3. Unit is per_second.
 * `num_dispatcher_cores` - (Optional) Number of dispatcher cores (0,1,2,4,8 or 16). If set to 0, then number of dispatcher cores is deduced automatically.requires se reboot. Allowed values are 0,1,2,4,8,16. Field introduced in 17.2.12, 18.1.3, 18.2.1.
 * `num_flow_cores_sum_changes_to_ignore` - (Optional) Number of changes in num flow cores sum to ignore.
+* `objsync_config` - (Optional) Configuration knobs for interse object distribution. Field introduced in 20.1.3.
+* `objsync_port` - (Optional) Tcp port on se management interface for interse object distribution. Supported only for externally managed security groups. Not supported on full access deployments. Requires se reboot. Field introduced in 20.1.3.
 * `openstack_availability_zones` - (Optional) Field introduced in 17.1.1. Maximum of 5 items allowed.
 * `openstack_mgmt_network_name` - (Optional) Avi management network name.
 * `openstack_mgmt_network_uuid` - (Optional) Management network uuid.
@@ -165,7 +165,7 @@ The following arguments are supported:
 * `se_group_analytics_policy` - (Optional) Analytics policy for serviceenginegroup. Field introduced in 20.1.3.
 * `se_hyperthreaded_mode` - (Optional) Controls the distribution of se data path processes on cpus which support hyper-threading. Requires hyper-threading to be enabled at host level. Requires se reboot. For more details please refer to se placement kb. Enum options - SE_CPU_HT_AUTO, SE_CPU_HT_SPARSE_DISPATCHER_PRIORITY, SE_CPU_HT_SPARSE_PROXY_PRIORITY, SE_CPU_HT_PACKED_CORES. Field introduced in 20.1.1.
 * `se_ip_encap_ipc` - (Optional) Determines if se-se ipc messages are encapsulated in an ip header       0        automatically determine based on hypervisor type    1        use ip encap unconditionally    ~[0,1]   don't use ip encaprequires se reboot. Field introduced in 20.1.3.
-* `se_kni_burst_factor` - (Optional) Knob to control burst size used in polling kni interfaces for traffic sent from kni towards dpdk application also controls burst size used by kni module to read pkts punted from dpdk application towards kni helps minimize drops in non-vip traffic in either pathfactor of (0-2) multiplies/divides burst size by 2^n. Allowed values are 0-2. Field introduced in 18.2.6.
+* `se_kni_burst_factor` - (Optional) This knob controls the resource availability and burst size used between se datapath and kni. This helps in minimising packet drops when there is higher kni traffic (non-vip traffic from and to linux). The factor takes the following values      0-default. 1-doubles the burst size and kni resources. 2-quadruples the burst size and kni resources. Allowed values are 0-2. Field introduced in 18.2.6.
 * `se_l3_encap_ipc` - (Optional) Determines if se-se ipc messages use se interface ip instead of vip        0        automatically determine based on hypervisor type    1        use se interface ip unconditionally    ~[0,1]   don't use se interface iprequires se reboot. Field introduced in 20.1.3.
 * `se_lro` - (Optional) Enable or disable large receive optimization for vnics. Requires se reboot. Field introduced in 18.2.5.
 * `se_mp_ring_retry_count` - (Optional) The retry count for the multi-producer enqueue before yielding the cpu. To be used under surveillance of avi support. Field introduced in 20.1.3. Allowed in basic(allowed values- 500) edition, essentials(allowed values- 500) edition, enterprise edition.
@@ -207,7 +207,7 @@ The following arguments are supported:
 * `transient_shared_memory_max` - (Optional) The threshold for the transient shared config memory in the se. Allowed values are 0-100. Field introduced in 20.1.1. Unit is percent.
 * `udf_log_throttle` - (Optional) This setting limits the number of udf logs generated per second per core on this se. Udf logs are generated due to the configured client log filters or the rules with logging enabled. Default is 100 logs per second. Set it to zero (0) to deactivate throttling. Field introduced in 17.1.3. Unit is per_second.
 * `use_hyperthreaded_cores` - (Optional) Enables the use of hyper-threaded cores on se. Requires se reboot. Field introduced in 20.1.1.
-* `use_objsync` - (Optional) Enable interse objsyc distribution framework. Field introduced in 20.1.3.
+* `use_objsync` - (Optional) Enable interse objsyc distribution framework. Field introduced in 20.1.3. Allowed in basic edition, essentials edition, enterprise edition.
 * `use_standard_alb` - (Optional) Use standard sku azure load balancer. By default cloud level flag is set. If not set, it inherits/uses the use_standard_alb flag from the cloud. Field introduced in 18.2.3.
 * `vcenter_clusters` - (Optional) Dict settings for serviceenginegroup.
 * `vcenter_datastore_mode` - (Optional) Enum options - vcenter_datastore_any, vcenter_datastore_local, vcenter_datastore_shared.

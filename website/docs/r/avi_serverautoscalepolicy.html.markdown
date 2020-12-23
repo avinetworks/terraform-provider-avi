@@ -30,6 +30,7 @@ resource "avi_serverautoscalepolicy" "foo" {
 The following arguments are supported:
 
 * `name` - (Required) Name of the object.
+* `delay_for_server_garbage_collection` - (Optional) Delay in minutes after which a down server will be removed from pool. Value 0 disables this functionality. Field introduced in 20.1.3.
 * `description` - (Optional) User defined description for the object.
 * `intelligent_autoscale` - (Optional) Use avi intelligent autoscale algorithm where autoscale is performed by comparing load on the pool against estimated capacity of all the servers.
 * `intelligent_scalein_margin` - (Optional) Maximum extra capacity as percentage of load used by the intelligent scheme. Scalein is triggered when available capacity is more than this margin. Allowed values are 1-99.

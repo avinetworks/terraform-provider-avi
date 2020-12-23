@@ -48,7 +48,7 @@ In addition to all arguments above, the following attributes are exported:
 * `close_client_conn_on_config_update` - Close client connection on vs config update. Field introduced in 17.2.4. Allowed in basic(allowed values- false) edition, essentials(allowed values- false) edition, enterprise edition.
 * `cloud_config_cksum` - Checksum of cloud configuration for vs. Internally set by cloud connector.
 * `cloud_ref` - It is a reference to an object of type cloud.
-* `cloud_type` - Enum options - cloud_none, cloud_vcenter, cloud_openstack, cloud_aws, cloud_vca, cloud_apic, cloud_mesos, cloud_linuxserver, cloud_docker_ucp, cloud_rancher, cloud_oshift_k8s, cloud_azure, cloud_gcp, cloud_nsxt. Allowed in basic(allowed values- cloud_none,coud_nsxt) edition, essentials(allowed values- cloud_none,cloud_vcenter) edition, enterprise edition.
+* `cloud_type` - Enum options - cloud_none, cloud_vcenter, cloud_openstack, cloud_aws, cloud_vca, cloud_apic, cloud_mesos, cloud_linuxserver, cloud_docker_ucp, cloud_rancher, cloud_oshift_k8s, cloud_azure, cloud_gcp, cloud_nsxt. Allowed in basic(allowed values- cloud_none,cloud_nsxt) edition, essentials(allowed values- cloud_none,cloud_vcenter) edition, enterprise edition.
 * `connections_rate_limit` - Rate limit the incoming connections to this virtual service.
 * `content_rewrite` - Profile used to match and rewrite strings in request and/or response body.
 * `created_by` - Creator name.
@@ -106,14 +106,14 @@ In addition to all arguments above, the following attributes are exported:
 * `topology_policies` - Topology policies applied on the dns traffic of the virtual service based ongslb topology algorithm. Field introduced in 18.2.3. Allowed in basic edition, essentials edition, enterprise edition.
 * `traffic_clone_profile_ref` - Server network or list of servers for cloning traffic. It is a reference to an object of type trafficcloneprofile. Field introduced in 17.1.1. Allowed in basic edition, essentials edition, enterprise edition.
 * `traffic_enabled` - Knob to enable the virtual service traffic on its assigned service engines. This setting is effective only when the enabled flag is set to true. Field introduced in 17.2.8.
-* `type` - Specify if this is a normal virtual service, or if it is the parent or child of an sni-enabled virtual hosted virtual service. Enum options - VS_TYPE_NORMAL, VS_TYPE_VH_PARENT, VS_TYPE_VH_CHILD. Allowed in essentials(allowed values- vs_type_normal) edition, enterprise edition.
+* `type` - Specify if this is a normal virtual service, or if it is the parent or child of an sni-enabled virtual hosted virtual service. Enum options - VS_TYPE_NORMAL, VS_TYPE_VH_PARENT, VS_TYPE_VH_CHILD. Allowed in basic(allowed values- vs_type_normal,vs_type_vh_parent) edition, essentials(allowed values- vs_type_normal) edition, enterprise edition.
 * `use_bridge_ip_as_vip` - Use bridge ip as vip on each host in mesos deployments. Allowed in basic(allowed values- false) edition, essentials(allowed values- false) edition, enterprise edition.
 * `use_vip_as_snat` - Use the virtual ip as the snat ip for health monitoring and sending traffic to the backend servers instead of the service engine interface ip. The caveat of enabling this option is that the virtualservice cannot be configued in an active-active ha mode. Dns based multi vip solution has to be used for ha & non-disruptive upgrade purposes. Field introduced in 17.1.9,17.2.3. Allowed in essentials(allowed values- false) edition, enterprise edition.
 * `uuid` - Uuid of the virtualservice.
 * `vh_domain_name` - The exact name requested from the client's sni-enabled tls hello domain name field. If this is a match, the parent vs will forward the connection to this child vs.
 * `vh_matches` - Host and path match criteria to select this child vs. Field introduced in 20.1.3.
 * `vh_parent_vs_uuid` - Specifies the virtual service acting as virtual hosting (sni) parent.
-* `vh_type` - Specify if the virtual hosting vs is of type sni or enhanced. Enum options - VS_TYPE_VH_SNI, VS_TYPE_VH_ENHANCED. Field introduced in 20.1.3.
+* `vh_type` - Specify if the virtual hosting vs is of type sni or enhanced. Enum options - VS_TYPE_VH_SNI, VS_TYPE_VH_ENHANCED. Field introduced in 20.1.3. Allowed in basic(allowed values- vs_type_vh_enhanced) edition, enterprise edition. Special default for basic edition is vs_type_vh_enhanced, enterprise is vs_type_vh_sni.
 * `vip` - List of virtual service ips. While creating a 'shared vs',please use vsvip_ref to point to the shared entities. Field introduced in 17.1.1.
 * `vrf_context_ref` - Virtual routing context that the virtual service is bound to. This is used to provide the isolation of the set of networks the application is attached to. It is a reference to an object of type vrfcontext.
 * `vs_datascripts` - Datascripts applied on the data traffic of the virtual service.
