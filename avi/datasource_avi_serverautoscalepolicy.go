@@ -11,6 +11,10 @@ func dataSourceAviServerAutoScalePolicy() *schema.Resource {
 	return &schema.Resource{
 		Read: ResourceAviServerAutoScalePolicyRead,
 		Schema: map[string]*schema.Schema{
+			"delay_for_server_garbage_collection": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"description": {
 				Type:     schema.TypeString,
 				Computed: true,

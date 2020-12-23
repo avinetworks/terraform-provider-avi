@@ -527,16 +527,6 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Required: true,
 		},
-		"netlink_poller_threads": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Default:  2,
-		},
-		"netlink_sock_buf_size": {
-			Type:     schema.TypeInt,
-			Optional: true,
-			Default:  4,
-		},
 		"non_significant_log_throttle": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -551,6 +541,17 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 			Type:     schema.TypeInt,
 			Optional: true,
 			Default:  8,
+		},
+		"objsync_config": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem:     ResourceObjSyncConfigSchema(),
+		},
+		"objsync_port": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  9001,
 		},
 		"openstack_availability_zones": {
 			Type:     schema.TypeList,
@@ -915,7 +916,7 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 		"use_objsync": {
 			Type:     schema.TypeBool,
 			Optional: true,
-			Default:  true,
+			Default:  false,
 		},
 		"use_standard_alb": {
 			Type:     schema.TypeBool,
