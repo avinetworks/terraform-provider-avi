@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceJWTServerProfileSchema() map[string]*schema.Schema {
@@ -59,7 +60,7 @@ func ResourceJWTServerProfileImporter(d *schema.ResourceData, m interface{}) ([]
 
 func ResourceAviJWTServerProfileRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceJWTServerProfileSchema()
-	err := ApiRead(d, meta, "jwtserverprofile", s)
+	err := APIRead(d, meta, "jwtserverprofile", s)
 	if err != nil {
 		log.Printf("[ERROR] in reading object %v\n", err)
 	}
@@ -68,7 +69,7 @@ func ResourceAviJWTServerProfileRead(d *schema.ResourceData, meta interface{}) e
 
 func resourceAviJWTServerProfileCreate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceJWTServerProfileSchema()
-	err := ApiCreateOrUpdate(d, meta, "jwtserverprofile", s)
+	err := APICreateOrUpdate(d, meta, "jwtserverprofile", s)
 	if err == nil {
 		err = ResourceAviJWTServerProfileRead(d, meta)
 	}
@@ -78,7 +79,7 @@ func resourceAviJWTServerProfileCreate(d *schema.ResourceData, meta interface{})
 func resourceAviJWTServerProfileUpdate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceJWTServerProfileSchema()
 	var err error
-	err = ApiCreateOrUpdate(d, meta, "jwtserverprofile", s)
+	err = APICreateOrUpdate(d, meta, "jwtserverprofile", s)
 	if err == nil {
 		err = ResourceAviJWTServerProfileRead(d, meta)
 	}
@@ -88,7 +89,7 @@ func resourceAviJWTServerProfileUpdate(d *schema.ResourceData, meta interface{})
 func resourceAviJWTServerProfileDelete(d *schema.ResourceData, meta interface{}) error {
 	objType := "jwtserverprofile"
 	client := meta.(*clients.AviClient)
-	if ApiDeleteSystemDefaultCheck(d) {
+	if APIDeleteSystemDefaultCheck(d) {
 		return nil
 	}
 	uuid := d.Get("uuid").(string)

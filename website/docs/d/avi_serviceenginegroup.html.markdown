@@ -126,10 +126,10 @@ In addition to all arguments above, the following attributes are exported:
 * `max_rules_per_lb` - Applicable to azure platform only. Maximum number of rules per azure lb. Field introduced in 17.2.12, 18.1.2.
 * `max_scaleout_per_vs` - Maximum number of active service engines for the virtual service. Allowed values are 1-64.
 * `max_se` - Maximum number of services engines in this group. Allowed values are 0-1000.
-* `max_vs_per_se` - Maximum number of virtual services that can be placed on a single service engine. East west virtual services are excluded from this limit. Allowed values are 1-1000.
+* `max_vs_per_se` - Maximum number of virtual services that can be placed on a single service engine. Allowed values are 1-1000.
 * `mem_reserve` - Boolean flag to set mem_reserve.
 * `memory_for_config_update` - Indicates the percent of memory reserved for config updates. Allowed values are 0-100. Field introduced in 18.1.2. Unit is percent.
-* `memory_per_se` - Amount of memory for each of the service engine virtual machines.
+* `memory_per_se` - Amount of memory for each of the service engine virtual machines. Changes to this setting do not affect existing ses.
 * `mgmt_network_ref` - Management network to use for avi service engines. It is a reference to an object of type network.
 * `mgmt_subnet` - Management subnet to use for avi service engines.
 * `min_cpu_usage` - When cpu usage on an se falls below the minimum threshold, virtual services hosted on the se may be consolidated onto other underutilized ses. After consolidation, unused service engines may then be eligible for deletion. Allowed values are 20-60. Unit is percent.
@@ -160,7 +160,7 @@ In addition to all arguments above, the following attributes are exported:
 * `se_deprovision_delay` - Duration to preserve unused service engine virtual machines before deleting them. If traffic to a virtual service were to spike up abruptly, this se would still be available to be utilized again rather than creating a new se. If this value is set to 0, controller will never delete any ses and administrator has to manually cleanup unused ses. Allowed values are 0-525600. Unit is min.
 * `se_dos_profile` - Dict settings for serviceenginegroup.
 * `se_dp_hm_drops` - Internal only. Used to simulate se - se hb failure. Field introduced in 20.1.3.
-* `se_dp_max_hb_version` - The highest supported se-se heartbeat protocol version. This version is reported by secondary se to primary se in heartbeat response messages. Allowed values are 1-3. Field introduced in 20.1.1.
+* `se_dp_max_hb_version` - The highest supported se-se heartbeat protocol version. This version is reported by secondary se to primary se in heartbeat response messages. Allowed values are 1-2. Field introduced in 20.1.1.
 * `se_dp_vnic_queue_stall_event_sleep` - Time (in seconds) service engine waits for after generating a vnic transmit queue stall event before resetting thenic. Field introduced in 18.2.5.
 * `se_dp_vnic_queue_stall_threshold` - Number of consecutive transmit failures to look for before generating a vnic transmit queue stall event. Field introduced in 18.2.5.
 * `se_dp_vnic_queue_stall_timeout` - Time (in milliseconds) to wait for network/nic recovery on detecting a transmit queue stall after which service engine resets the nic. Field introduced in 18.2.5.
@@ -224,7 +224,7 @@ In addition to all arguments above, the following attributes are exported:
 * `vcenter_folder` - Folder to place all the service engine virtual machines in vcenter.
 * `vcenter_hosts` - Dict settings for serviceenginegroup.
 * `vcenters` - Vcenter information for scoping at host/cluster level. Field introduced in 20.1.1.
-* `vcpus_per_se` - Number of vcpus for each of the service engine virtual machines.
+* `vcpus_per_se` - Number of vcpus for each of the service engine virtual machines. Changes to this setting do not affect existing ses.
 * `vip_asg` - When vip_asg is set, vip configuration will be managed by avi.user will be able to configure vip_asg or vips individually at the time of create. Field introduced in 17.2.12, 18.1.2.
 * `vs_host_redundancy` - Ensure primary and secondary service engines are deployed on different physical hosts. Allowed in basic(allowed values- true) edition, essentials(allowed values- true) edition, enterprise edition. Special default for basic edition is true, essentials edition is true, enterprise is true.
 * `vs_scalein_timeout` - Time to wait for the scaled in se to drain existing flows before marking the scalein done. Unit is sec.

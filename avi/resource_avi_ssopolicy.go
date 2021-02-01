@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceSSOPolicySchema() map[string]*schema.Schema {
@@ -72,7 +73,7 @@ func ResourceSSOPolicyImporter(d *schema.ResourceData, m interface{}) ([]*schema
 
 func ResourceAviSSOPolicyRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceSSOPolicySchema()
-	err := ApiRead(d, meta, "ssopolicy", s)
+	err := APIRead(d, meta, "ssopolicy", s)
 	if err != nil {
 		log.Printf("[ERROR] in reading object %v\n", err)
 	}
@@ -81,7 +82,7 @@ func ResourceAviSSOPolicyRead(d *schema.ResourceData, meta interface{}) error {
 
 func resourceAviSSOPolicyCreate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceSSOPolicySchema()
-	err := ApiCreateOrUpdate(d, meta, "ssopolicy", s)
+	err := APICreateOrUpdate(d, meta, "ssopolicy", s)
 	if err == nil {
 		err = ResourceAviSSOPolicyRead(d, meta)
 	}
@@ -91,7 +92,7 @@ func resourceAviSSOPolicyCreate(d *schema.ResourceData, meta interface{}) error 
 func resourceAviSSOPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceSSOPolicySchema()
 	var err error
-	err = ApiCreateOrUpdate(d, meta, "ssopolicy", s)
+	err = APICreateOrUpdate(d, meta, "ssopolicy", s)
 	if err == nil {
 		err = ResourceAviSSOPolicyRead(d, meta)
 	}
@@ -101,7 +102,7 @@ func resourceAviSSOPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 func resourceAviSSOPolicyDelete(d *schema.ResourceData, meta interface{}) error {
 	objType := "ssopolicy"
 	client := meta.(*clients.AviClient)
-	if ApiDeleteSystemDefaultCheck(d) {
+	if APIDeleteSystemDefaultCheck(d) {
 		return nil
 	}
 	uuid := d.Get("uuid").(string)

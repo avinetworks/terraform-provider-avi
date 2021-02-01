@@ -1,17 +1,19 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+//nolint
 func ResourceDynamicDnsRecordSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
 		"algorithm": {
@@ -118,6 +120,7 @@ func ResourceDynamicDnsRecordSchema() map[string]*schema.Schema {
 	}
 }
 
+//nolint
 func resourceAviDynamicDnsRecord() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceAviDynamicDnsRecordCreate,
@@ -131,43 +134,48 @@ func resourceAviDynamicDnsRecord() *schema.Resource {
 	}
 }
 
+//nolint
 func ResourceDynamicDnsRecordImporter(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
 	s := ResourceDynamicDnsRecordSchema()
 	return ResourceImporter(d, m, "dynamicdnsrecord", s)
 }
 
+//nolint
 func ResourceAviDynamicDnsRecordRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceDynamicDnsRecordSchema()
-	err := ApiRead(d, meta, "dynamicdnsrecord", s)
+	err := APIRead(d, meta, "dynamicdnsrecord", s)
 	if err != nil {
 		log.Printf("[ERROR] in reading object %v\n", err)
 	}
 	return err
 }
 
+//nolint
 func resourceAviDynamicDnsRecordCreate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceDynamicDnsRecordSchema()
-	err := ApiCreateOrUpdate(d, meta, "dynamicdnsrecord", s)
+	err := APICreateOrUpdate(d, meta, "dynamicdnsrecord", s)
 	if err == nil {
 		err = ResourceAviDynamicDnsRecordRead(d, meta)
 	}
 	return err
 }
 
+//nolint
 func resourceAviDynamicDnsRecordUpdate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceDynamicDnsRecordSchema()
 	var err error
-	err = ApiCreateOrUpdate(d, meta, "dynamicdnsrecord", s)
+	err = APICreateOrUpdate(d, meta, "dynamicdnsrecord", s)
 	if err == nil {
 		err = ResourceAviDynamicDnsRecordRead(d, meta)
 	}
 	return err
 }
 
+//nolint
 func resourceAviDynamicDnsRecordDelete(d *schema.ResourceData, meta interface{}) error {
 	objType := "dynamicdnsrecord"
 	client := meta.(*clients.AviClient)
-	if ApiDeleteSystemDefaultCheck(d) {
+	if APIDeleteSystemDefaultCheck(d) {
 		return nil
 	}
 	uuid := d.Get("uuid").(string)

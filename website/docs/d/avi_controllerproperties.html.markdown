@@ -71,8 +71,8 @@ In addition to all arguments above, the following attributes are exported:
 * `max_threads_cc_vip_bg_worker` - Maximum number of threads in threadpool used by cloud connector ccvipbgworker. Allowed values are 1-100. Field introduced in 20.1.3.
 * `permission_scoped_shared_admin_networks` - Network and vrfcontext objects from the admin tenant will not be shared to non-admin tenants unless admin permissions are granted. Field introduced in 18.2.7, 20.1.1.
 * `persistence_key_rotate_period` - Period for rotate app persistence keys job. Allowed values are 1-1051200. Special values are 0 - 'disabled'. Unit is min. Allowed in basic(allowed values- 0) edition, essentials(allowed values- 0) edition, enterprise edition.
-* `portal_request_burst_limit` - Burst limit on number of incoming requests0 to disable. Field introduced in 20.1.1.
-* `portal_request_rate_limit` - Maximum average number of requests allowed per second0 to disable. Field introduced in 20.1.1. Unit is per_second.
+* `portal_request_burst_limit` - Burst limit on number of incoming requests 0 to disable. Field introduced in 20.1.1.
+* `portal_request_rate_limit` - Maximum average number of requests allowed per second 0 to disable. Field introduced in 20.1.1. Unit is per_second.
 * `portal_token` - Token used for uploading tech-support to portal. Field introduced in 16.4.6,17.1.2.
 * `process_locked_useraccounts_timeout_period` - Period for process locked user accounts job. Field introduced in 18.1.1. Unit is min.
 * `process_pki_profile_timeout_period` - Period for process pki profile job. Field introduced in 18.1.1. Unit is min.
@@ -84,6 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 * `se_offline_del` - Unit is sec.
 * `se_spawn_retry_interval` - Default retry period before attempting another service engine spawn in se group. Field introduced in 20.1.1. Unit is sec.
 * `se_vnic_cooldown` - Unit is sec.
+* `se_vnic_gc_wait_time` - Duration to wait after last vnic addition before proceeding with vnic garbage collection. Used for testing purposes. Field introduced in 20.1.4. Unit is sec.
 * `secure_channel_cleanup_timeout` - Period for secure channel cleanup job. Unit is min.
 * `secure_channel_controller_token_timeout` - Unit is min.
 * `secure_channel_se_token_timeout` - Unit is min.

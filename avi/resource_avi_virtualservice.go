@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceVirtualServiceSchema() map[string]*schema.Schema {
@@ -470,7 +471,7 @@ func ResourceVirtualServiceImporter(d *schema.ResourceData, m interface{}) ([]*s
 
 func ResourceAviVirtualServiceRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceVirtualServiceSchema()
-	err := ApiRead(d, meta, "virtualservice", s)
+	err := APIRead(d, meta, "virtualservice", s)
 	if err != nil {
 		log.Printf("[ERROR] in reading object %v\n", err)
 	}
@@ -479,7 +480,7 @@ func ResourceAviVirtualServiceRead(d *schema.ResourceData, meta interface{}) err
 
 func resourceAviVirtualServiceCreate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceVirtualServiceSchema()
-	err := ApiCreateOrUpdate(d, meta, "virtualservice", s)
+	err := APICreateOrUpdate(d, meta, "virtualservice", s)
 	if err == nil {
 		err = ResourceAviVirtualServiceRead(d, meta)
 	}
@@ -489,7 +490,7 @@ func resourceAviVirtualServiceCreate(d *schema.ResourceData, meta interface{}) e
 func resourceAviVirtualServiceUpdate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceVirtualServiceSchema()
 	var err error
-	err = ApiCreateOrUpdate(d, meta, "virtualservice", s)
+	err = APICreateOrUpdate(d, meta, "virtualservice", s)
 	if err == nil {
 		err = ResourceAviVirtualServiceRead(d, meta)
 	}
@@ -499,7 +500,7 @@ func resourceAviVirtualServiceUpdate(d *schema.ResourceData, meta interface{}) e
 func resourceAviVirtualServiceDelete(d *schema.ResourceData, meta interface{}) error {
 	objType := "virtualservice"
 	client := meta.(*clients.AviClient)
-	if ApiDeleteSystemDefaultCheck(d) {
+	if APIDeleteSystemDefaultCheck(d) {
 		return nil
 	}
 	uuid := d.Get("uuid").(string)

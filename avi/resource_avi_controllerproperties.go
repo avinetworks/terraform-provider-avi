@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
@@ -266,6 +267,11 @@ func ResourceControllerPropertiesSchema() map[string]*schema.Schema {
 			Optional: true,
 			Default:  120,
 		},
+		"se_vnic_gc_wait_time": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Default:  300,
+		},
 		"secure_channel_cleanup_timeout": {
 			Type:     schema.TypeInt,
 			Optional: true,
@@ -424,7 +430,7 @@ func ResourceControllerPropertiesImporter(d *schema.ResourceData, m interface{})
 
 func ResourceAviControllerPropertiesRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceControllerPropertiesSchema()
-	err := ApiRead(d, meta, "controllerproperties", s)
+	err := APIRead(d, meta, "controllerproperties", s)
 	if err != nil {
 		log.Printf("[ERROR] in reading object %v\n", err)
 	}
@@ -433,7 +439,7 @@ func ResourceAviControllerPropertiesRead(d *schema.ResourceData, meta interface{
 
 func resourceAviControllerPropertiesCreate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceControllerPropertiesSchema()
-	err := ApiCreateOrUpdate(d, meta, "controllerproperties", s)
+	err := APICreateOrUpdate(d, meta, "controllerproperties", s)
 	if err == nil {
 		err = ResourceAviControllerPropertiesRead(d, meta)
 	}
@@ -443,7 +449,7 @@ func resourceAviControllerPropertiesCreate(d *schema.ResourceData, meta interfac
 func resourceAviControllerPropertiesUpdate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceControllerPropertiesSchema()
 	var err error
-	err = ApiCreateOrUpdate(d, meta, "controllerproperties", s)
+	err = APICreateOrUpdate(d, meta, "controllerproperties", s)
 	if err == nil {
 		err = ResourceAviControllerPropertiesRead(d, meta)
 	}
@@ -453,7 +459,7 @@ func resourceAviControllerPropertiesUpdate(d *schema.ResourceData, meta interfac
 func resourceAviControllerPropertiesDelete(d *schema.ResourceData, meta interface{}) error {
 	objType := "controllerproperties"
 	client := meta.(*clients.AviClient)
-	if ApiDeleteSystemDefaultCheck(d) {
+	if APIDeleteSystemDefaultCheck(d) {
 		return nil
 	}
 	uuid := d.Get("uuid").(string)

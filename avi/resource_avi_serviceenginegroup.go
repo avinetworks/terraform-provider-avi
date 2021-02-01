@@ -1,16 +1,18 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
 	"time"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
@@ -916,7 +918,7 @@ func ResourceServiceEngineGroupSchema() map[string]*schema.Schema {
 		"use_objsync": {
 			Type:     schema.TypeBool,
 			Optional: true,
-			Default:  false,
+			Default:  true,
 		},
 		"use_standard_alb": {
 			Type:     schema.TypeBool,
@@ -1055,7 +1057,7 @@ func ResourceServiceEngineGroupImporter(d *schema.ResourceData, m interface{}) (
 
 func ResourceAviServiceEngineGroupRead(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceServiceEngineGroupSchema()
-	err := ApiRead(d, meta, "serviceenginegroup", s)
+	err := APIRead(d, meta, "serviceenginegroup", s)
 	if err != nil {
 		log.Printf("[ERROR] in reading object %v\n", err)
 	}
@@ -1064,7 +1066,7 @@ func ResourceAviServiceEngineGroupRead(d *schema.ResourceData, meta interface{})
 
 func resourceAviServiceEngineGroupCreate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceServiceEngineGroupSchema()
-	err := ApiCreateOrUpdate(d, meta, "serviceenginegroup", s)
+	err := APICreateOrUpdate(d, meta, "serviceenginegroup", s)
 	if err == nil {
 		err = ResourceAviServiceEngineGroupRead(d, meta)
 	}
@@ -1074,7 +1076,7 @@ func resourceAviServiceEngineGroupCreate(d *schema.ResourceData, meta interface{
 func resourceAviServiceEngineGroupUpdate(d *schema.ResourceData, meta interface{}) error {
 	s := ResourceServiceEngineGroupSchema()
 	var err error
-	err = ApiCreateOrUpdate(d, meta, "serviceenginegroup", s)
+	err = APICreateOrUpdate(d, meta, "serviceenginegroup", s)
 	if err == nil {
 		err = ResourceAviServiceEngineGroupRead(d, meta)
 	}
@@ -1101,7 +1103,7 @@ func resourceAviServiceEngineGroupDelete(d *schema.ResourceData, meta interface{
 			}
 		}
 	}
-	if ApiDeleteSystemDefaultCheck(d) {
+	if APIDeleteSystemDefaultCheck(d) {
 		return nil
 	}
 	uuid := d.Get("uuid").(string)

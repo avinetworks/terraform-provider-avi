@@ -42,6 +42,7 @@ In addition to all arguments above, the following attributes are exported:
 * `enable_rollback` - Check if the rollback is possible on this node. Field introduced in 18.2.6.
 * `end_time` - End time of upgrade operation. Field introduced in 18.2.6.
 * `enqueue_time` - Enqueue time of upgrade operation. Field introduced in 18.2.6.
+* `history` - Record of past operations on this node. Field introduced in 20.1.4.
 * `image_path` - Image path of current base image. Field introduced in 18.2.10, 20.1.1.
 * `image_ref` - Image uuid for identifying the current base image. It is a reference to an object of type image. Field introduced in 18.2.6.
 * `name` - Name of the system such as cluster name, se group name and se name. Field introduced in 18.2.6.

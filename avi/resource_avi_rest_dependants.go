@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceACSubjectInfoSchema() *schema.Resource {
@@ -1257,6 +1257,40 @@ func ResourceAppLearningParamsSchema() *schema.Resource {
 	}
 }
 
+func ResourceAppSignatureConfigSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"app_signature_sync_interval": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Default:  1440,
+			},
+		},
+	}
+}
+
+func ResourceAppSignatureEventDataSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"last_successful_updated_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"reason": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"status": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceApplicationSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -1921,6 +1955,16 @@ func ResourceAuditComplianceEventInfoSchema() *schema.Resource {
 				Computed: true,
 			},
 			"location": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"node": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"process_name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -6145,6 +6189,28 @@ func ResourceControllerCloudLimitsSchema() *schema.Resource {
 	}
 }
 
+func ResourceControllerDiscontinuousTimeChangeEventDetailsSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"from_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"node_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"to_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceControllerLicenseSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -9168,6 +9234,12 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceApicAgentVsNetworkErrorSchema(),
 			},
+			"app_signature_event_data": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceAppSignatureEventDataSchema(),
+			},
 			"avg_uptime_change_details": {
 				Type:     schema.TypeSet,
 				Optional: true,
@@ -9467,6 +9539,12 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceContainerCloudServiceSchema(),
+			},
+			"controller_discontinuous_time_change_event_details": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceControllerDiscontinuousTimeChangeEventDetailsSchema(),
 			},
 			"controller_license_reconcile_details": {
 				Type:     schema.TypeSet,
@@ -9845,6 +9923,12 @@ func ResourceEventDetailsSchema() *schema.Resource {
 				Optional: true,
 				Computed: true,
 				Elem:     ResourceSeMgrEventDetailsSchema(),
+			},
+			"se_discontinuous_time_change_event_details": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceSeDiscontinuousTimeChangeEventDetailsSchema(),
 			},
 			"se_dupip_event_details": {
 				Type:     schema.TypeSet,
@@ -17664,6 +17748,11 @@ func ResourceMetricsEventThresholdSchema() *schema.Resource {
 func ResourceMetricsMgrDebugFilterSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
+			"debug_skip_eval_period": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
 			"disable_hw_training": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -19556,6 +19645,65 @@ func ResourceOperationalStatusSchema() *schema.Resource {
 	}
 }
 
+func ResourceOpsHistorySchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"duration": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"end_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"ops": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"patch_version": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"se_upgrade_events": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceSeUpgradeEventsSchema(),
+			},
+			"seg_status": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceSeGroupStatusSchema(),
+			},
+			"start_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"state": {
+				Type:     schema.TypeSet,
+				Optional: true,
+				Computed: true,
+				Elem:     ResourceUpgradeOpsStateSchema(),
+			},
+			"upgrade_events": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     ResourceEventMapSchema(),
+			},
+			"version": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceOshiftDockerRegistryMetaDataSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -20431,6 +20579,11 @@ func ResourcePortalConfigurationSchema() *schema.Resource {
 func ResourcePortalFeatureOptInSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
+			"enable_appsignature_sync": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  false,
+			},
 			"enable_auto_case_creation_on_se_failure": {
 				Type:     schema.TypeBool,
 				Optional: true,
@@ -23098,6 +23251,38 @@ func ResourceSeBootupPropertiesSchema() *schema.Resource {
 	}
 }
 
+func ResourceSeDiscontinuousTimeChangeEventDetailsSchema() *schema.Resource {
+	return &schema.Resource{
+		Schema: map[string]*schema.Schema{
+			"drift_time": {
+				Type:     schema.TypeInt,
+				Optional: true,
+				Computed: true,
+			},
+			"from_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"se_name": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"se_ref": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"to_time": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+		},
+	}
+}
+
 func ResourceSeDupipEventDetailsSchema() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -25123,6 +25308,11 @@ func ResourceSeUpgradeEventsSchema() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
+			},
+			"sub_tasks": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 			"task": {
 				Type:     schema.TypeString,

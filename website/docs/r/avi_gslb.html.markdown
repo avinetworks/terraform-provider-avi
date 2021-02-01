@@ -44,6 +44,7 @@ The following arguments are supported:
 * `send_interval` - (Optional) Frequency with which group members communicate. Allowed values are 1-3600. Unit is sec.
 * `send_interval_prior_to_maintenance_mode` - (Optional) The user can specify a send-interval while entering maintenance mode. The validity of this 'maintenance send-interval' is only during maintenance mode. When the user leaves maintenance mode, the original send-interval is reinstated. This internal variable is used to store the original send-interval. Field introduced in 18.2.3. Unit is sec.
 * `tenant_ref` - (Optional) It is a reference to an object of type tenant.
+* `tenant_scoped` - (Optional) This field indicates tenant visibility for gs pool member selection across the gslb federated objects. Field introduced in 20.1.4.
 * `third_party_sites` - (Optional) Third party site member belonging to this gslb. Field introduced in 17.1.1.
 * `view_id` - (Optional) The view-id is used in change-leader mode to differentiate partitioned groups while they have the same gslb namespace. Each partitioned group will be able to operate independently by using the view-id.
 
