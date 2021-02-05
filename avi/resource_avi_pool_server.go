@@ -1,16 +1,17 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
 import (
-	"github.com/avinetworks/sdk/go/clients"
-	"github.com/avinetworks/sdk/go/models"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strconv"
+
+	"github.com/avinetworks/sdk/go/clients"
+	"github.com/avinetworks/sdk/go/models"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func ResourceAviPoolServerSchema() map[string]*schema.Schema {
@@ -144,7 +145,7 @@ func resourceAviServer() *schema.Resource {
 
 func resourceAviServerCreateOrUpdate(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*clients.AviClient)
-	err, pUUID, poolObj, pserver := resourceAviServerReadApi(d, meta)
+	pUUID, poolObj, pserver, err := resourceAviServerReadAPI(d, meta)
 	//added check for err and poolObj.
 	if err != nil || poolObj == nil {
 		log.Printf("[ERROR] resourceAviServerCreateOrUpdate Error during fetching pool object using pool_ref %v", err)
@@ -212,8 +213,8 @@ func resourceAviServerCreateOrUpdate(d *schema.ResourceData, meta interface{}) e
 		pserver.Ratio = &r
 	}
 	if ResolveServerByDNS, ok := d.GetOk("resolve_server_by_dns"); ok {
-		resolveSvrByDns := ResolveServerByDNS.(bool)
-		pserver.ResolveServerByDNS = &resolveSvrByDns
+		resolveSvrByDNS := ResolveServerByDNS.(bool)
+		pserver.ResolveServerByDNS = &resolveSvrByDNS
 	}
 	if RewriteHostHeader, ok := d.GetOk("rewrite_host_header"); ok {
 		rewriteHostHdr := RewriteHostHeader.(bool)
@@ -258,7 +259,7 @@ func resourceAviServerCreateOrUpdate(d *schema.ResourceData, meta interface{}) e
 }
 
 func ResourceAviServerRead(d *schema.ResourceData, meta interface{}) error {
-	err, pUUID, _, pserver := resourceAviServerReadApi(d, meta)
+	pUUID, _, pserver, err := resourceAviServerReadAPI(d, meta)
 	if err == nil && pserver != nil {
 		//Set id to include port number. if port is not in tf then use 0
 		var sUUID string
@@ -326,7 +327,7 @@ func ResourceAviServerRead(d *schema.ResourceData, meta interface{}) error {
 	return err
 }
 
-func resourceAviServerReadApi(d *schema.ResourceData, meta interface{}) (error, string, *models.Pool, *models.Server) {
+func resourceAviServerReadAPI(d *schema.ResourceData, meta interface{}) (string, *models.Pool, *models.Server, error) {
 	client := meta.(*clients.AviClient)
 	pUUID := UUIDFromID(d.Get("pool_ref").(string))
 	uri := "api/pool/" + pUUID
@@ -334,7 +335,7 @@ func resourceAviServerReadApi(d *schema.ResourceData, meta interface{}) (error, 
 	err := client.AviSession.Get(uri, &poolObj)
 	if err != nil {
 		log.Printf("[ERROR] pool uuid %v not found", pUUID)
-		return err, pUUID, nil, nil
+		return pUUID, nil, nil, err
 	}
 	log.Printf("[INFO] found pool %v", poolObj.Name)
 	ip := d.Get("ip").(string)
@@ -356,12 +357,12 @@ func resourceAviServerReadApi(d *schema.ResourceData, meta interface{}) (error, 
 			}
 		}
 	}
-	return nil, pUUID, poolObj, matchedServer
+	return pUUID, poolObj, matchedServer, nil
 }
 
 func resourceAviServerDelete(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*clients.AviClient)
-	err, pUUID, poolObj, pserver := resourceAviServerReadApi(d, meta)
+	pUUID, poolObj, pserver, err := resourceAviServerReadAPI(d, meta)
 	log.Printf("[DEBUG] pool %v %v server %v", pUUID, poolObj.Name, d.Id())
 	if pserver != nil {
 		uri := "api/pool/" + pUUID

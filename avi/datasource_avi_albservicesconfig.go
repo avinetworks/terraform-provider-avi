@@ -1,16 +1,21 @@
 /*
- * Copyright (c) 2017. Avi Networks.
- * Author: Gaurav Rastogi (grastogi@avinetworks.com)
- *
+* Copyright (c) 2017. Avi Networks.
+* Author: Gaurav Rastogi (grastogi@avinetworks.com)
+*
  */
 package avi
 
-import "github.com/hashicorp/terraform/helper/schema"
+import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 func dataSourceAviALBServicesConfig() *schema.Resource {
 	return &schema.Resource{
 		Read: ResourceAviALBServicesConfigRead,
 		Schema: map[string]*schema.Schema{
+			"app_signature_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceAppSignatureConfigSchema(),
+			},
 			"asset_contact": {
 				Type:     schema.TypeSet,
 				Computed: true,
