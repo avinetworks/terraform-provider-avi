@@ -3,6 +3,8 @@ Terraform Provider
 - [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
 - Website: https://www.terraform.io
 - Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
+- Use https://github.com/vmware/terraform-provider-avi for avi terraform provider version 20.1.4+
+- [Integrating Terraform with Avi Vantage](https://kbstage.avinetworks.com/docs/20.1/integrating-terraform-with-avi-vantage/)
 
 <img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-text.svg" width="600px">
 
