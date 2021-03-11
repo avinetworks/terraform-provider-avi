@@ -3,7 +3,7 @@ Terraform Provider
 - [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
 - Website: https://www.terraform.io
 - Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
-- AVI team will no longer maintain this repo and it will be archived soon. New repo is 
+- This repo is no longer maintained and it will be archived soon. New repo is 
   [here](https://github.com/vmware/terraform-provider-avi).
 - Recommended to use avi terraform provider from 
   [terraform registry](https://registry.terraform.io/providers/vmware/avi/latest) with terraform version 0.13+. Please
