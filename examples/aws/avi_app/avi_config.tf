@@ -74,7 +74,6 @@ provider "avi" {
   avi_password   = var.avi_password
   avi_controller = data.aws_instance.avi_controller.private_ip
   avi_tenant     = "admin"
-  avi_version    = var.avi_version
 }
 
 data "avi_tenant" "default_tenant" {
@@ -338,6 +337,10 @@ resource "avi_virtualservice" "terraform-virtualservice" {
   se_group_ref                 = data.avi_serviceenginegroup.se_group.id
   vrf_context_ref              = data.avi_vrfcontext.terraform_vrf.id
   vsvip_ref                    = avi_vsvip.terraform-vip.id
+
+  dns_info {
+    fqdn = "aws_vs.${var.project_name}.awsavi.net"
+  }
 
   services {
     port = 80

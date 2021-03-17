@@ -41,7 +41,6 @@ provider "avi" {
   avi_password   = var.avi_password
   avi_controller = data.aws_instance.avi_controller.private_ip
   avi_tenant     = "admin"
-  avi_version    = var.avi_version
 }
 
 data "avi_tenant" "default_tenant" {
@@ -95,11 +94,12 @@ resource "avi_serviceenginegroup" "aws_se_group" {
   name                         = "Default-Group"
   archive_shm_limit            = 8
   algo                         = "PLACEMENT_ALGO_PACKED"
+  archive_shm_limit            = 8
   buffer_se                    = 0
   cloud_ref                    = avi_cloud.aws_cloud_cfg.id
   connection_memory_percentage = 50
   disk_per_se                  = 10
-  //enable_vip_on_all_interfaces = true
+  enable_vip_on_all_interfaces = true
   ha_mode                      = "HA_MODE_SHARED"
   instance_flavor              = "t2.large"
   license_tier                 = "ENTERPRISE_18"

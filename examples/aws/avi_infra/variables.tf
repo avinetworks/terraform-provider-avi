@@ -22,9 +22,6 @@ variable "avi_username" {
 variable "avi_password" {
 }
 
-variable "avi_version" {
-}
-
 variable "aws_availability_zones" {
   type    = list(string)
   default = ["us-west-2a", "us-west-2b", "us-west-2c"]
