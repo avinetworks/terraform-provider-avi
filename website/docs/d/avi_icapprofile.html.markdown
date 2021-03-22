@@ -51,5 +51,5 @@ In addition to all arguments above, the following attributes are exported:
 * `slow_response_warning_threshold` - If the icap request takes longer than this value, this request will generate a significant log entry. Allowed values are 50-3600000. Field introduced in 20.1.1. Unit is milliseconds.
 * `tenant_ref` - Tenant which this object belongs to. It is a reference to an object of type tenant. Field introduced in 20.1.1.
 * `uuid` - Uuid of the icap profile. Field introduced in 20.1.1.
-* `vendor` - The vendor of the icap server. Enum options - ICAP_VENDOR_GENERIC, ICAP_VENDOR_OPSWAT. Field introduced in 20.1.1.
+* `vendor` - The vendor of the icap server. Enum options - ICAP_VENDOR_GENERIC, ICAP_VENDOR_OPSWAT, ICAP_VENDOR_LASTLINE. Field introduced in 20.1.1.
 

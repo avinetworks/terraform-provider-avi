@@ -42,6 +42,7 @@ In addition to all arguments above, the following attributes are exported:
 * `ipam_selector` - Determines the set of ipam networks to use for this vsvip. Selector type must be selector_ipam and only one label is supported. Field introduced in 20.1.3.
 * `labels` - Key value pairs for granular object access control. Also allows for classification and tagging of similar objects. Field introduced in 20.1.2. Maximum of 4 items allowed.
 * `name` - Name for the vsvip object. Field introduced in 17.1.1.
+* `peer_labels` - Select bgp peers, using peer label, for vsvip advertisement. Field introduced in 20.1.5. Maximum of 128 items allowed.
 * `tenant_ref` - It is a reference to an object of type tenant. Field introduced in 17.1.1.
 * `tier1_lr` - This sets the placement scope of virtualservice to given tier1 logical router in nsx-t. Field introduced in 20.1.1.
 * `use_standard_alb` - This overrides the cloud level default and needs to match the se group value in which it will be used if the se group use_standard_alb value is set. This is only used when fip is used for vs on azure cloud. Field introduced in 18.2.3. Allowed in basic edition, essentials edition, enterprise edition.

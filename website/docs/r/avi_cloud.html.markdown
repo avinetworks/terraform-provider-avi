@@ -65,6 +65,7 @@ The following arguments are supported:
 * `tenant_ref` - (Optional) It is a reference to an object of type tenant.
 * `vca_configuration` - (Optional) Dict settings for cloud.
 * `vcenter_configuration` - (Optional) Dict settings for cloud.
+* `vmc_deployment` - (Optional) This deployment is vmware on aws cloud. Field introduced in 20.1.5, 21.1.1.
 
 
 ### Timeouts

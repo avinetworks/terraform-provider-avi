@@ -37,6 +37,11 @@ func ResourcePoolSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
+		"append_port": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Default:  "NON_DEFAULT_80_443",
+		},
 		"application_persistence_profile_ref": {
 			Type:     schema.TypeString,
 			Optional: true,

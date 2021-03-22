@@ -45,6 +45,11 @@ func ResourceSSLProfileSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
+		"ec_named_curve": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Default:  "auto",
+		},
 		"enable_early_data": {
 			Type:     schema.TypeBool,
 			Optional: true,
@@ -73,6 +78,11 @@ func ResourceSSLProfileSchema() map[string]*schema.Schema {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  true,
+		},
+		"signature_algorithm": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Default:  "ECDSA+SHA256:RSA+SHA256",
 		},
 		"ssl_rating": {
 			Type:     schema.TypeSet,

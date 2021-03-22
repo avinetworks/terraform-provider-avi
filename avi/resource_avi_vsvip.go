@@ -45,6 +45,11 @@ func ResourceVsVipSchema() map[string]*schema.Schema {
 			Type:     schema.TypeString,
 			Required: true,
 		},
+		"peer_labels": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem:     &schema.Schema{Type: schema.TypeString},
+		},
 		"tenant_ref": {
 			Type:     schema.TypeString,
 			Optional: true,

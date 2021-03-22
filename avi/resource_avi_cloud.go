@@ -213,6 +213,11 @@ func ResourceCloudSchema() map[string]*schema.Schema {
 			Computed: true,
 			Elem:     ResourcevCenterConfigurationSchema(),
 		},
+		"vmc_deployment": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
+		},
 		"vtype": {
 			Type:     schema.TypeString,
 			Required: true,

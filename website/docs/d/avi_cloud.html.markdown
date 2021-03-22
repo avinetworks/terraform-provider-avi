@@ -70,5 +70,6 @@ In addition to all arguments above, the following attributes are exported:
 * `uuid` - Unique object identifier of the object.
 * `vca_configuration` - Dict settings for cloud.
 * `vcenter_configuration` - Dict settings for cloud.
+* `vmc_deployment` - This deployment is vmware on aws cloud. Field introduced in 20.1.5, 21.1.1.
 * `vtype` - Cloud type. Enum options - CLOUD_NONE, CLOUD_VCENTER, CLOUD_OPENSTACK, CLOUD_AWS, CLOUD_VCA, CLOUD_APIC, CLOUD_MESOS, CLOUD_LINUXSERVER, CLOUD_DOCKER_UCP, CLOUD_RANCHER, CLOUD_OSHIFT_K8S, CLOUD_AZURE, CLOUD_GCP, CLOUD_NSXT. Allowed in basic(allowed values- cloud_none,cloud_nsxt) edition, essentials(allowed values- cloud_none,cloud_vcenter) edition, enterprise edition.
 
