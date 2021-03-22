@@ -43,7 +43,7 @@ The following arguments are supported:
 * `response_timeout` - (Optional) Maximum time, client's request will be paused for icap processing. If this timeout is exceeded, the request to the icap server will be aborted and the configured fail action is executed. Allowed values are 50-3600000. Field introduced in 20.1.1. Unit is milliseconds.
 * `slow_response_warning_threshold` - (Optional) If the icap request takes longer than this value, this request will generate a significant log entry. Allowed values are 50-3600000. Field introduced in 20.1.1. Unit is milliseconds.
 * `tenant_ref` - (Optional) Tenant which this object belongs to. It is a reference to an object of type tenant. Field introduced in 20.1.1.
-* `vendor` - (Optional) The vendor of the icap server. Enum options - ICAP_VENDOR_GENERIC, ICAP_VENDOR_OPSWAT. Field introduced in 20.1.1.
+* `vendor` - (Optional) The vendor of the icap server. Enum options - ICAP_VENDOR_GENERIC, ICAP_VENDOR_OPSWAT, ICAP_VENDOR_LASTLINE. Field introduced in 20.1.1.
 
 
 ### Timeouts

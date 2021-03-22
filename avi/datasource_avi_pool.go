@@ -29,6 +29,10 @@ func dataSourceAviPool() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"append_port": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
 			"application_persistence_profile_ref": {
 				Type:     schema.TypeString,
 				Computed: true,

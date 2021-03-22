@@ -34,7 +34,7 @@ The following arguments are supported:
 * `authorization_policy` - (Optional) Authorization policy settings. Field introduced in 18.2.5.
 * `labels` - (Optional) Key value pairs for granular object access control. Also allows for classification and tagging of similar objects. Field introduced in 20.1.2. Maximum of 4 items allowed.
 * `tenant_ref` - (Optional) Uuid of the tenant. It is a reference to an object of type tenant. Field introduced in 18.2.3.
-* `type` - (Optional) Sso policy type. Enum options - SSO_TYPE_SAML, SSO_TYPE_PINGACCESS, SSO_TYPE_JWT. Field introduced in 18.2.5.
+* `type` - (Optional) Sso policy type. Enum options - SSO_TYPE_SAML, SSO_TYPE_PINGACCESS, SSO_TYPE_JWT, SSO_TYPE_LDAP. Field introduced in 18.2.5.
 
 
 ### Timeouts

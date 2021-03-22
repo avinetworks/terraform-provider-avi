@@ -40,6 +40,11 @@ func dataSourceAviVsVip() *schema.Resource {
 				Optional: true,
 				Computed: true,
 			},
+			"peer_labels": {
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 			"tenant_ref": {
 				Type:     schema.TypeString,
 				Optional: true,

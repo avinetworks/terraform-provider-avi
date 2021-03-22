@@ -194,6 +194,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"downstream_send_timeout": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"dp_aggressive_deq_interval_msec": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -227,6 +231,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 			},
 			"enable_gratarp_permanent": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"enable_hsm_log": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
@@ -307,6 +315,14 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"http_rum_console_log": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"http_rum_min_content_length": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"hypervisor": {
 				Type:     schema.TypeString,
 				Computed: true,
@@ -337,10 +353,26 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Computed: true,
 				Elem:     ResourceIptableRuleSetSchema(),
 			},
+			"l7_conns_per_core": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"l7_resvd_listen_conns_per_core": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"labels": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem:     ResourceKeyValueSchema(),
+			},
+			"lbaction_num_requests_to_dispatch": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"lbaction_rq_per_request_max_retries": {
+				Type:     schema.TypeInt,
+				Computed: true,
 			},
 			"least_load_core_selection": {
 				Type:     schema.TypeBool,
@@ -456,6 +488,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"ngx_free_connection_stack": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"non_significant_log_throttle": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -531,6 +567,18 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"sdb_flush_interval": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"sdb_pipeline_size": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"sdb_scan_count": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"se_bandwidth_type": {
 				Type:     schema.TypeString,
 				Computed: true,
@@ -549,6 +597,14 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Elem:     ResourceDosThresholdProfileSchema(),
 			},
 			"se_dp_hm_drops": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"se_dp_isolation": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"se_dp_isolation_num_non_dp_cpus": {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
@@ -761,6 +817,10 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
+			"ssl_sess_cache_per_vs": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"tenant_ref": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -774,6 +834,22 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"upstream_connect_timeout": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"upstream_connpool_enable": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"upstream_read_timeout": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
+			"upstream_send_timeout": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"use_hyperthreaded_cores": {
 				Type:     schema.TypeBool,
 				Computed: true,
@@ -784,6 +860,15 @@ func dataSourceAviServiceEngineGroup() *schema.Resource {
 			},
 			"use_standard_alb": {
 				Type:     schema.TypeBool,
+				Computed: true,
+			},
+			"user_agent_cache_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceUserAgentCacheConfigSchema(),
+			},
+			"user_defined_metric_age": {
+				Type:     schema.TypeInt,
 				Computed: true,
 			},
 			"uuid": {

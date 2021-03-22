@@ -51,16 +51,15 @@ func ResourceVirtualServiceSchema() map[string]*schema.Schema {
 			Optional: true,
 			Computed: true,
 		},
+		"bot_policy_ref": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+		},
 		"bulk_sync_kvcache": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  false,
-		},
-		"client_auth": {
-			Type:     schema.TypeSet,
-			Optional: true,
-			Computed: true,
-			Elem:     ResourceHTTPClientAuthenticationParamsSchema(),
 		},
 		"close_client_conn_on_config_update": {
 			Type:     schema.TypeBool,
@@ -199,6 +198,12 @@ func ResourceVirtualServiceSchema() map[string]*schema.Schema {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem:     ResourceKeyValueSchema(),
+		},
+		"ldap_vs_config": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Computed: true,
+			Elem:     ResourceLDAPVSConfigSchema(),
 		},
 		"limit_doser": {
 			Type:     schema.TypeBool,

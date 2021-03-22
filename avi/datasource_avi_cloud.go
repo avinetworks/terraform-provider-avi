@@ -173,6 +173,10 @@ func dataSourceAviCloud() *schema.Resource {
 				Computed: true,
 				Elem:     ResourcevCenterConfigurationSchema(),
 			},
+			"vmc_deployment": {
+				Type:     schema.TypeBool,
+				Computed: true,
+			},
 			"vtype": {
 				Type:     schema.TypeString,
 				Computed: true,

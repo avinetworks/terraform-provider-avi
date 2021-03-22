@@ -42,7 +42,7 @@ In addition to all arguments above, the following attributes are exported:
 * `cloud_ref` - It is a reference to an object of type cloud.
 * `debugvrfcontext` - Configure debug flags for vrf. Field introduced in 17.1.1.
 * `description` - User defined description for the object.
-* `gateway_mon` - Configure ping based heartbeat check for gateway in service engines of vrf. Maximum of 32 items allowed.
+* `gateway_mon` - Configure ping based heartbeat check for gateway in service engines of vrf.
 * `internal_gateway_monitor` - Configure ping based heartbeat check for all default gateways in service engines of vrf. Field introduced in 17.1.1.
 * `labels` - Key/value labels which can be used for object access policy permission scoping. Field introduced in 18.2.7, 20.1.1.
 * `lldp_enable` - Enable lldp. Field introduced in 18.2.10, 20.1.1. Allowed in basic(allowed values- true) edition, essentials(allowed values- true) edition, enterprise edition.

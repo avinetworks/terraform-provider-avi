@@ -40,14 +40,13 @@ func dataSourceAviVirtualService() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"bot_policy_ref": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
 			"bulk_sync_kvcache": {
 				Type:     schema.TypeBool,
 				Computed: true,
-			},
-			"client_auth": {
-				Type:     schema.TypeSet,
-				Computed: true,
-				Elem:     ResourceHTTPClientAuthenticationParamsSchema(),
 			},
 			"close_client_conn_on_config_update": {
 				Type:     schema.TypeBool,
@@ -166,6 +165,11 @@ func dataSourceAviVirtualService() *schema.Resource {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem:     ResourceKeyValueSchema(),
+			},
+			"ldap_vs_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceLDAPVSConfigSchema(),
 			},
 			"limit_doser": {
 				Type:     schema.TypeBool,

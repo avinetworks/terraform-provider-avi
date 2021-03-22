@@ -95,6 +95,10 @@ func dataSourceAviControllerProperties() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"del_offline_se_after_reboot_delay": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"dns_refresh_period": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -183,6 +187,10 @@ func dataSourceAviControllerProperties() *schema.Resource {
 				Type:     schema.TypeInt,
 				Computed: true,
 			},
+			"resmgr_log_caching_period": {
+				Type:     schema.TypeInt,
+				Computed: true,
+			},
 			"safenet_hsm_version": {
 				Type:     schema.TypeString,
 				Computed: true,
@@ -267,6 +275,11 @@ func dataSourceAviControllerProperties() *schema.Resource {
 			"upgrade_se_per_vs_scale_ops_txn_time": {
 				Type:     schema.TypeInt,
 				Computed: true,
+			},
+			"user_agent_cache_config": {
+				Type:     schema.TypeSet,
+				Computed: true,
+				Elem:     ResourceUserAgentCacheConfigSchema(),
 			},
 			"uuid": {
 				Type:     schema.TypeString,
