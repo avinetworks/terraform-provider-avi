@@ -7,28 +7,27 @@ package avi
 
 import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-func dataSourceAviRole() *schema.Resource {
+func dataSourceAviJWTProfile() *schema.Resource {
 	return &schema.Resource{
-		Read: ResourceAviRoleRead,
+		Read: ResourceAviJWTProfileRead,
 		Schema: map[string]*schema.Schema{
-			"allow_unlabelled_access": {
+			"is_federated": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
-			"filters": {
+			"jwks_keys": {
 				Type:     schema.TypeList,
 				Computed: true,
-				Elem:     ResourceRoleFilterSchema(),
+				Elem:     ResourceJWSKeySchema(),
+			},
+			"jwt_auth_type": {
+				Type:     schema.TypeString,
+				Computed: true,
 			},
 			"name": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
-			},
-			"privileges": {
-				Type:     schema.TypeList,
-				Computed: true,
-				Elem:     ResourcePermissionSchema(),
 			},
 			"tenant_ref": {
 				Type:     schema.TypeString,

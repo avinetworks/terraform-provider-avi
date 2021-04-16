@@ -7,30 +7,16 @@ package avi
 
 import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-func dataSourceAviRole() *schema.Resource {
+func dataSourceAviLabelGroup() *schema.Resource {
 	return &schema.Resource{
-		Read: ResourceAviRoleRead,
+		Read: ResourceAviLabelGroupRead,
 		Schema: map[string]*schema.Schema{
-			"allow_unlabelled_access": {
-				Type:     schema.TypeBool,
-				Computed: true,
-			},
-			"filters": {
+			"labels": {
 				Type:     schema.TypeList,
 				Computed: true,
-				Elem:     ResourceRoleFilterSchema(),
+				Elem:     ResourceRoleMatchOperationMatchLabelSchema(),
 			},
 			"name": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
-			},
-			"privileges": {
-				Type:     schema.TypeList,
-				Computed: true,
-				Elem:     ResourcePermissionSchema(),
-			},
-			"tenant_ref": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
