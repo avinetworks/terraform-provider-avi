@@ -4,20 +4,20 @@
 -->
 ---
 layout: "avi"
-page_title: "Avi: avi_errorpageprofile"
-sidebar_current: "docs-avi-resource-errorpageprofile"
+page_title: "Avi: avi_labelgroup"
+sidebar_current: "docs-avi-resource-labelgroup"
 description: |-
-  Creates and manages Avi ErrorPageProfile.
+  Creates and manages Avi LabelGroup.
 ---
 
-# avi_errorpageprofile
+# avi_labelgroup
 
-The ErrorPageProfile resource allows the creation and management of Avi ErrorPageProfile
+The LabelGroup resource allows the creation and management of Avi LabelGroup
 
 ## Example Usage
 
 ```hcl
-resource "avi_errorpageprofile" "foo" {
+resource "avi_labelgroup" "foo" {
     name = "terraform-example-foo"
     tenant_ref = "/api/tenant/?name=admin"
 }
@@ -27,10 +27,8 @@ resource "avi_errorpageprofile" "foo" {
 
 The following arguments are supported:
 
-* `name` - (Required) Field introduced in 17.2.4.
-* `error_pages` - (Optional) Defined error pages for http status codes. Field introduced in 17.2.4.
-* `markers` - (Optional) List of labels to be used for granular rbac. Field introduced in 20.1.5.
-* `tenant_ref` - (Optional) It is a reference to an object of type tenant. Field introduced in 17.2.4.
+* `name` - (Required) Name of the label group. Field introduced in 20.1.5.
+* `labels` - (Optional) List of allowed or suggested labels for the label group. Field introduced in 20.1.5.
 
 
 ### Timeouts
@@ -45,5 +43,5 @@ The `timeouts` block allows you to specify [timeouts](https://www.terraform.io/d
 
 In addition to all arguments above, the following attributes are exported:
 
-* `uuid` -  Field introduced in 17.2.4.
+* `uuid` -  Uuid of the label group. Field introduced in 20.1.5.
 
